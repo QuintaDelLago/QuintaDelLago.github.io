@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,
+       initial-scale=1.0">
+  <title>Edición de convenios</title>
+  <script
+    src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js">
+    </script>
+  <script
+    src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js">
+    </script>
+  <script
+    src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js">
+    </script>
+  <script
+    src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js">
+    </script>
+  <script src="js/init.js">
+  </script>
+  <script type="module"
+    src="cmp/mi-nav.js">
+    </script>
+  <script type="module"
+    src="cmp/mi-footer.js">
+    </script>
+  <script type="module"
+    src="cmp/mi-progreso.js">
+    </script>
+  <link rel="stylesheet"
+    href="css/estilos.css">
+</head>
+<body>
+  <form name="forma">
+    <mi-nav></mi-nav>
+    <header>
+      <h1>
+        <output name="cue">
+          Edición de convenios
+          <mi-progreso>
+          </mi-progreso>
+        </output>
+      </h1>
+      <div class="herramientas">
+        <a href="convenios.html">
+          Cancelar</a>
+        <button name="eliminar"
+          type="button">
+          Eliminar convenio
+        </button>
+        <button>Guardar</button>
+      </div>
+      <p>
+        <label>
+          Nombre de la empresa
+          <input name="nombreempresa"
+            type="text" required>
+        </label>
+      </p>
+      <p>
+        <label>
+          Servicio que ofrece
+          <input name="servicio"
+            type="text" required>
+        </label>
+      </p>
+      <p>
+        <label>
+          Número telefónico
+          <input name="numerotelefono"
+            type="number" required>
+        </label>
+      </p>
+      <p>
+        <label>
+          Nombre del encargado
+          <input name="encargado"
+            type="integer" required>
+        </label>
+      </p><mi-footer></mi-footer>
+  </form>
+  <script type="module"
+    src="js/CtrlUsuario.js">
+    </script>
+</body>
+</html>

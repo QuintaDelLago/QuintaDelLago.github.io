@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,
+       initial-scale=1.0">
+  <title>Edición de pago</title>
+  <script
+    src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js">
+    </script>
+  <script
+    src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js">
+    </script>
+  <script
+    src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js">
+    </script>
+  <script src="js/init.js">
+  </script>
+  <script type="module"
+    src="cmp/mi-nav.js">
+    </script>
+  <script type="module"
+    src="cmp/mi-footer.js">
+  </script>
+  <script type="module"
+  src="cmp/mi-progreso.js"> 
+  </script>
+  <link rel="stylesheet"
+    href="css/estilos.css">
+</head>
+<body>
+  <form id="forma">
+    <mi-nav></mi-nav>
+    <header>
+      <h1>Edición de pago</h1>
+      <div class="herramientas">
+        <a href="pagospendientes.html">
+          Cancelar</a>
+        <button id="guardar">Guardar</button>
+        <button id="eliminar">
+          Eliminar
+        </button>
+      </div>
+      <mi-progreso>
+      </mi-progreso>
+    </header>
+    <p>
+      <label>
+        Tipo de evento
+        <input name="tipodeevento" type="text" required>
+      </label>
+    </p>
+    <p>
+      <label>
+        Paquete
+        <select id="paquete">
+          <option value="500">Golden</option>
+          <option value="680">Silver</option>
+          <option value="750">Premium</option>
+        </select>
+      </label>
+    </p>
+    <p>
+      <label>
+        Número de invitados
+        <input id="numerodeinvitados" type="number" min="0" required>
+          <input id="calcularapagar" type="submit" class="boton" value="Calcular monto a pagar" onclick="return false">
+      </label>
+    </p>
+    <p>
+      <label>
+        Monto a pagar
+        <input id="montoapagar" disabled required>
+      </label>
+    </p>
+    <p>
+      <label>
+        Monto pagado
+        <input id="montopagado" type="number" required min="1">
+        <input id="calcularfaltante" type="submit" class="boton" value="Calcular faltante" onclick="return false">
+      </label>
+    </p>
+    <p>
+      <label>
+        Faltante
+        <input id="faltante" disabled required>
+      </label>
+    </p>
+    <p>
+      <label>
+        Fecha del evento
+        <input name="fecha" type="date" required min="2022-01-01">
+      </label>
+    </p>
+    <mi-footer></mi-footer>
+  </form>
+  <script type="module"
+    src="js/CtrlEdiciondePago.js">
+    </script>
+</body>
+</html>
+
