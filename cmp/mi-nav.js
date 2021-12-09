@@ -18,9 +18,6 @@ class MiNav extends HTMLElement {
           <li>
             <a href="galeria.html">Galería</a>
           </li>
-          <li>
-            <a href="preguntasfrecuentes.html">Preguntas</a>
-          </li>
         </li>
       </ul>`;
     this.ul =
@@ -43,30 +40,44 @@ class MiNav extends HTMLElement {
               usu.email);
           /* Enlaces para solo
            * para clientes. */
-          if (roles.has("Cliente")) {
+          if (roles.has("Administrador")) {
             html += /* html */
               `<li>
-                <a href=
-                  "chat.html">Chat</a>
+                <a href="convenios.html">Convenios</a>
+                <a href="citas">Citas</a>
+                <a href="eventos.html">Eventos</a>
+                <a href="trabajadores.html">Trabajadores</a>
+                <a href="pagospendientes.html">Pagos</a>
+                <a href="preguntasfrecuentes.html">Preguntas</a>
+                <a href="paquetes.html">Paquetes</a>
               </li>`;
           }
           /* Enlaces para solo
            * administradores.
            */
-          if (roles.has(
-            "Administrador")) {
+          if (roles.has("Cliente")) {
             html += /* html */
               `<li>
-                <a href="alumnos.html">Alumnos</a>
-              </li>
-              <li>
-                <a href="usuarios.html">Usuarios</a>
+                <a href="pagoscliente.html">Pagos</a>
+                <a href="preguntasfrecuentes.html">Preguntas</a>
+                <a href="paquetes.html">Paquetes</a>
+              </li>`;
+          }
+          if (roles.has("Visitante")) {
+            html += /* html */
+              `<li>
+                <a href="preguntasfrecuentesexternos.html">Preguntas</a>
+                <a href="paquetes.html">Paquetes</a>
+              </li>`;
+          }
+          if (roles.has("Espectador")) {
+            html += /* html */
+              `<li>
+                <a href="preguntasfrecuentesexternos.html">Preguntas</a>
+                <a href="contacto.html">Contacto</a>
               </li>`;
           }
           this.ul.innerHTML += html;
         }
       }
     }
-
-
-customElements.define("mi-nav", MiNav);
