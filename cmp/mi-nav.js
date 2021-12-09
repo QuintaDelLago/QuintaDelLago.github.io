@@ -26,7 +26,7 @@ class MiNav extends HTMLElement {
       usuario => this.
         cambiaUsuario(usuario),
       muestraError);
-  }
+}
 
   /**
    * @param {import(
@@ -81,3 +81,4 @@ class MiNav extends HTMLElement {
         }
       }
     }
+  customElements.define("mi-nav", MiNav);
