@@ -36,14 +36,26 @@ class MiNav extends HTMLElement {
            * para administrador. */
           if (roles.has("Administrador")) {
             html += /* html */
-              `<li>
+            `<li>
                 <a href="convenios.html">Convenios</a>
-                <a href="citas">Citas</a>
+              </li>
+              <li>
+                <a href="citas.html">Citas</a>
+              </li>
+              <li>
                 <a href="eventos.html">Eventos</a>
+              </li>
+              <li>
                 <a href="trabajadores.html">Trabajadores</a>
-                <a href="pagospendientes.html">Pagos</a>
-                <a href="preguntasfrecuentes.html">Preguntas</a>
-                <a href="paquetes.html">Paquetes</a>
+              </li>
+              <li>
+                <a href="preguntasfrecuentes.html">Trabajadores</a>
+              </li>
+              <li>
+                <a href="pagospendientes.html">Trabajadores</a>
+              </li>
+              <li>
+                <a href="paquetes.html">Trabajadores</a>
               </li>`;
           }
           /* Enlaces para solo
