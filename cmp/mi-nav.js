@@ -20,13 +20,9 @@ class MiNav extends HTMLElement {
           </li>
         </li>
       </ul>`;
-    this.ul =
-      this.querySelector("ul");
-    getAuth().onAuthStateChanged(
-      usuario => this.
-        cambiaUsuario(usuario),
-      muestraError);
-}
+    this.ul = this.querySelector("ul");
+    getAuth().onAuthStateChanged(usuario => this.cambiaUsuario(usuario), muestraError);
+    }
 
   /**
    * @param {import(
@@ -35,11 +31,9 @@ class MiNav extends HTMLElement {
       async cambiaUsuario(usu) {
         if (usu && usu.email) {
           let html = "";
-          const roles =
-            await cargaRoles(
-              usu.email);
+          const roles = await cargaRoles(usu.email);
           /* Enlaces para solo
-           * para clientes. */
+           * para administrador. */
           if (roles.has("Administrador")) {
             html += /* html */
               `<li>
@@ -53,7 +47,7 @@ class MiNav extends HTMLElement {
               </li>`;
           }
           /* Enlaces para solo
-           * administradores.
+           * clientes.
            */
           if (roles.has("Cliente")) {
             html += /* html */
@@ -63,6 +57,7 @@ class MiNav extends HTMLElement {
                 <a href="paquetes.html">Paquetes</a>
               </li>`;
           }
+
           if (roles.has("Visitante")) {
             html += /* html */
               `<li>
@@ -80,5 +75,5 @@ class MiNav extends HTMLElement {
           this.ul.innerHTML += html;
         }
       }
-    }
-  customElements.define("mi-nav", MiNav);
+    }  
+customElements.define("mi-nav", MiNav);
