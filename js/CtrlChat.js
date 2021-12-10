@@ -21,20 +21,16 @@ const lista = document.
   querySelector("#lista");
 
 getAuth().onAuthStateChanged(
-  protege, muestraError);
+  obtiene, muestraError);
 
 /** @param {import(
     "../lib/tiposFire.js").User}
     usuario */
-async function protege(usuario) {
-  if (tieneRol(usuario,
-    ["Administrador"] || tieneRol(usuario,
-      ["Cliente"])) {
+async function obtiene(usuario) {
     usuarioId = usuario.email;
     consulta();
     forma.addEventListener(
       "submit", agrega);
-  }
 }
 
 /** Agrega un usuario a la base de
