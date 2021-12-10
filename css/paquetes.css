@@ -3,6 +3,7 @@
    width: max-content;
    height: max-content;
    align-items: center;
+   font-family: sans-serif;
  }
 .golden{
    background-color: goldenrod;
