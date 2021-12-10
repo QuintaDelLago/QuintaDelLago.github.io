@@ -4,8 +4,21 @@
  */
 
 /**
- * @typedef {Object} Alumno
+ * @typedef {Object} Evento
  * @property {string} nombre
+ * @property {string} tipo
+ * @property {string} invitados
+ * @property {string} fecha
+ */
+
+/**
+ * @typedef {Object} Cita
+ * @property {string} fecha
+ */
+
+/**
+ * @typedef {Object} Pago
+ * @property {string} fecha
  */
 
 /**

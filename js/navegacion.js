@@ -1,7 +1,19 @@
 export function
-  muestraAlumnos() {
+  muestraEventos() {
   location.href =
-    "alumnos.html";
+    "eventos.html";
+}
+
+export function
+  muestraCitas() {
+  location.href =
+    "citas.html";
+}
+
+export function
+  muestraPagos() {
+  location.href =
+    "pagos.html";
 }
 
 export function
