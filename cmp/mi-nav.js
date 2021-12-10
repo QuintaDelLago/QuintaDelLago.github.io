@@ -65,7 +65,11 @@ class MiNav extends HTMLElement {
             html += /* html */
               `<li>
                 <a href="pagoscliente.html">Pagos</a>
+              </li>
+              <li>
                 <a href="preguntasfrecuentes.html">Preguntas</a>
+              </li>
+              <li>
                 <a href="paquetes.html">Paquetes</a>
               </li>`;
           }
@@ -73,19 +77,24 @@ class MiNav extends HTMLElement {
           if (roles.has("Visitante")) {
             html += /* html */
               `<li>
-                <a href="preguntasfrecuentesexternos.html">Preguntas</a>
+                 <a href="preguntasfrecuentesexternos.html">Preguntas</a>
+              </li>
+              <li>
                 <a href="paquetes.html">Paquetes</a>
               </li>`;
           }
           if (roles.has("Espectador")) {
             html += /* html */
-              `<li>
+            `<li>
                 <a href="preguntasfrecuentesexternos.html">Preguntas</a>
+            </li>
+            <li>
                 <a href="contacto.html">Contacto</a>
-              </li>`;
+            </li>`;
           }
           this.ul.innerHTML += html;
         }
       }
     }  
 customElements.define("mi-nav", MiNav);
+
