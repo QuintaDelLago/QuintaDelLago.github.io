@@ -42,9 +42,9 @@ async function busca() {
           import("./tipos.js").
                   Evento} */
       const data = doc.data();
-      forma.nombre.value = data.nombre;
-      forma.tipo.value = data.tipo  || "";
-      forma.invitados.value = data.invitados || "";
+      forma.nombredelcliente.value = data.nombre;
+      forma.tipodeevento.value = data.tipo  || "";
+      forma.numetodeinvitados.value = data.invitados || "";
       forma.fecha.value = data.fecha || "";
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
