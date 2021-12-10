@@ -15,7 +15,7 @@ import {
 
 const daoEventos =
   getFirestore().
-    collection("Eventos");
+    collection("Citas");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 getAuth().onAuthStateChanged(protege, muestraError);
@@ -35,18 +35,18 @@ async function guarda(evt) {
   try {
     evt.preventDefault();
     const formData = new FormData(forma);
-    const nombre = getString(formData, "nombre").trim();  
-    const tipo = getString(formData, "tipo").trim();
-    const invitados = getString(formData, "invitados").trim();
+    const nombre = getString(formData, "nombredelcliente").trim();  
     const fecha = getString(formData, "fecha").trim();
+    const hora = getString(formData, "hora").trim();
+    const correo = getString(formData, "correoelectronico").trim();
     /**
      * @type {
-        import("./tipos.js").Evento} */
+        import("./tipos.js").Cita} */
     const modelo = {
       nombre, 
-      tipo,
-      invitados,
-      fecha
+      fecha,
+      hora,
+      correo
     };
     await daoEventos.
       add(modelo);

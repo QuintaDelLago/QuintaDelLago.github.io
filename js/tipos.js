@@ -13,7 +13,10 @@
 
 /**
  * @typedef {Object} Cita
+ * @property {string} nombre
  * @property {string} fecha
+ * @property {string} hora
+ * @property {string} correo
  */
 
 /**
