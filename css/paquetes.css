@@ -1,3 +1,6 @@
+@import "mi-nav.css";
+@import "mi-footer.css";
+
 :root{
    width: max-content;
    height: max-content;
