@@ -49,13 +49,13 @@ class MiNav extends HTMLElement {
                 <a href="trabajadores.html">Trabajadores</a>
               </li>
               <li>
-                <a href="preguntasfrecuentes.html">Trabajadores</a>
+                <a href="preguntasfrecuentes.html">Preguntas</a>
               </li>
               <li>
-                <a href="pagospendientes.html">Trabajadores</a>
+                <a href="pagospendientes.html">Pagos</a>
               </li>
               <li>
-                <a href="paquetes.html">Trabajadores</a>
+                <a href="paquetes.html">Paquetes</a>
               </li>`;
           }
           /* Enlaces para solo
