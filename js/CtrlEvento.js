@@ -88,9 +88,7 @@ async function elimina() {
   try {
     if (confirm("Confirmar la " +
       "eliminación")) {
-      await daoEventos.
-        doc(id).
-        delete();
+      await daoEventos.doc(id).delete();
       muestraEventos();
     }
   } catch (e) {
