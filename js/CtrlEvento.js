@@ -63,9 +63,9 @@ async function guarda(evt) {
   try {
     evt.preventDefault();
     const formData = new FormData(forma);
-    const nombre = getString(formData, "nombre").trim();  
-    const tipo = getString(formData, "tipo").trim();
-    const invitados = getString(formData, "invitados").trim();
+    const nombre = getString(formData, "nombredelcliente").trim();  
+    const tipo = getString(formData, "tipodeevento").trim();
+    const invitados = getString(formData, "numerodeinvitados").trim();
     const fecha = getString(formData, "fecha").trim();
     /**
      * @type {
