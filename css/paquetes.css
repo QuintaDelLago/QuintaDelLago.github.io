@@ -1,14 +1,7 @@
-@import "mi-nav.css";
-@import "mi-footer.css";
 :root{
    width: max-content;
+   height: max-content;
    align-items: center;
-   font-family: sans-serif;
-   padding-top: 1rem;
-   padding-bottom: 1rem;
-   padding-right: 1rem;
-   padding-left: 1rem;
-   margin-right: 1rem;
  }
 .golden{
    background-color: goldenrod;
@@ -16,44 +9,39 @@
    float: left;
    border: 5px solid gold;     
    padding-top: 1rem;
-   height: 492px;
+   padding-bottom: 1rem;
+   padding-right: 1rem;
+   padding-left: 1rem;
+   margin-right: 1rem;
 }
 .silver{
    background-color: silver;
    color: black;
    float: left;
    border: 5px solid gray;
-   height: 492px;
+   padding-top: 1rem;
+   padding-bottom: 1rem;
+   padding-right: 1rem;
+   padding-left: 1rem;
+   margin-right: 1rem;
 }
 .premium{
    background-color: black;
    color: white;
    float: right; 
    border: 5px solid gray;
-   height: 492px;   
+   padding-top: 1rem;
+   padding-bottom: 1rem;
+   padding-right: 1rem;
+   padding-left: 1rem;
+   
 }
-
+.titulo{
+ font-weight: bold; 
+ font-size: x-large;
+ padding-left: 70px;
+}
 .cuerpo{
  width: fit-content;
  height: fit-content;
- margin: 0 auto;
- padding: 0.5rem;
 }
-.titulo{
-   font-weight: bold; 
-   font-size: x-large;
-   padding-left: 70px;
-  }
-
-  h1 {
-   margin: 0.5rem 0;
- }
-
-header {
-   position: -webkit-sticky;
-   position: sticky;
-   top: 0;
-   background-color: white
- }
-
- 
