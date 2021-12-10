@@ -32,15 +32,22 @@
    border: 5px solid gray;
    height: 492px;   
 }
-h1 {
-   margin: 0.5rem 0;
- }
+
 .cuerpo{
  width: fit-content;
  height: fit-content;
  margin: 0 auto;
  padding: 0.5rem;
 }
+.titulo{
+   font-weight: bold; 
+   font-size: x-large;
+   padding-left: 70px;
+  }
+
+  h1 {
+   margin: 0.5rem 0;
+ }
 
 header {
    position: -webkit-sticky;
