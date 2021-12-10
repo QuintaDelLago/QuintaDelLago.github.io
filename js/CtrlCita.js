@@ -13,7 +13,7 @@ import {
   tieneRol
 } from "./seguridad.js";
 
-const daoEventos = getFirestore().collection("Eventos");
+const daoCitas = getFirestore().collection("Citas");
 const params = new URL(location.href).searchParams;
 const id = params.get("fecha");
 /** @type {HTMLFormElement} */
@@ -35,7 +35,7 @@ async function protege(usuario) {
  * corresponden al id recibido. */
 async function busca() {
   try {
-    const doc = await daoEventos.doc(id).get();
+    const doc = await daoCitas.doc(id).get();
     if (doc.exists) {
       /**
        * @type {
@@ -77,7 +77,7 @@ async function guarda(evt) {
       invitados,
       fecha
     };
-    await daoEventos.doc(id).set(modelo);
+    await daoCitas.doc(id).set(modelo);
     muestraEventos();
   } catch (e) {
     muestraError(e);
@@ -88,7 +88,7 @@ async function elimina() {
   try {
     if (confirm("Confirmar la " +
       "eliminación")) {
-      await daoEventos.
+      await daoCitas.
         doc(id).
         delete();
       muestraEventos();
