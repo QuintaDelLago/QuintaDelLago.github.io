@@ -45,6 +45,8 @@
 .cuerpo{
  width: fit-content;
  height: fit-content;
+ margin: 0 auto;
+ padding: 0.5rem;
 }
 
 header {
