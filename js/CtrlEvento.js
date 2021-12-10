@@ -44,7 +44,7 @@ async function busca() {
       const data = doc.data();
       forma.nombredelcliente.value = data.nombre;
       forma.tipodeevento.value = data.tipo  || "";
-      forma.numetodeinvitados.value = data.invitados || "";
+      forma.numerodeinvitados.value = data.invitados || "";
       forma.fecha.value = data.fecha || "";
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
