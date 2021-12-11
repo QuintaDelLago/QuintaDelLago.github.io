@@ -67,13 +67,11 @@ function htmlFila(doc) {
                   Cita} */
   const data = doc.data();
   const nombre = cod(data.nombre);
-  const hsf = cod(data.hora);
-  const hora = new Date(hsf);
+  const hora = cod(data.hora);
   var fsf= cod(data.fecha);
   var fecha = new Date(fsf);
   var espacio="[   -   ]";
   var dformat = [fecha.getDate()+1, fecha.getMonth()+1, fecha.getFullYear()].join('/');
-  var hformat = [hsf.getHours(), hsf.getMinutes()].join(':');
   const parámetros =
     new URLSearchParams();
   parámetros.append("id", doc.id);
@@ -82,7 +80,7 @@ function htmlFila(doc) {
       <a class="fila" href=
   "cita.html?${parámetros}">
         <strong class="primario">
-          ${nombre} ${dformat} ${hformat}
+          ${nombre} ${dformat} ${fecha}
         </strong>
       </a>
      
