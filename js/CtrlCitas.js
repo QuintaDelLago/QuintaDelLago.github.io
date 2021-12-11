@@ -13,9 +13,9 @@ import {
 /** @type {HTMLUListElement} */
 const lista = document.
   querySelector("#lista");
-const daoAlumno =
+const daoCitas =
   getFirestore().
-    collection("Eventos");
+    collection("Citas");
 
 getAuth().
   onAuthStateChanged(
@@ -32,7 +32,7 @@ async function protege(usuario) {
 }
 
 function consulta() {
-  daoAlumno.
+  daoCitas.
     orderBy("fecha")
     .onSnapshot(
       htmlLista, errConsulta);
@@ -50,7 +50,7 @@ function htmlLista(snap) {
   } else {
     html += /* html */
       `<li class="vacio">
-        -- No hay eventos
+        -- No hay citas
         registrados. --
       </li>`;
   }
@@ -64,10 +64,10 @@ function htmlLista(snap) {
 function htmlFila(doc) {
   /**
    * @type {import("./tipos.js").
-                  Evento} */
+                  Cita} */
   const data = doc.data();
   const nombre = cod(data.nombre);
-  const tipo = cod(data.tipo);
+  const hora = cod(data.hora);
   var fsf= cod(data.fecha);
   var fecha = new Date(fsf);
   var espacio="[   -   ]";
@@ -80,7 +80,7 @@ function htmlFila(doc) {
       <a class="fila" href=
   "evento.html?${parámetros}">
         <strong class="primario">
-          ${nombre} ${tipo} ${dformat}
+          ${nombre} ${fecha} ${hora}
         </strong>
       </a>
      
