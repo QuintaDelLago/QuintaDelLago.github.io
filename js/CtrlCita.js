@@ -15,7 +15,7 @@ import {
 
 const daoCitas = getFirestore().collection("Citas");
 const params = new URL(location.href).searchParams;
-const id = params.get("fecha");
+const id = params.get("id");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 
@@ -42,10 +42,10 @@ async function busca() {
           import("./tipos.js").
                   Evento} */
       const data = doc.data();
-      forma.nombre.value = data.nombre;
-      forma.tipo.value = data.tipo  || "";
-      forma.invitados.value = data.invitados || "";
-      forma.fecha.value = data.fecha || "";
+      forma.nombredelcliente.value = data.nombre;
+      forma.fecha.value = data.fecha  || "";
+      forma.hora.value = data.hora || "";
+      forma.correoelectronico.value = data.correo || "";
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
     } else {
@@ -63,19 +63,19 @@ async function guarda(evt) {
   try {
     evt.preventDefault();
     const formData = new FormData(forma);
-    const nombre = getString(formData, "nombre").trim();  
-    const tipo = getString(formData, "tipo").trim();
-    const invitados = getString(formData, "invitados").trim();
+    const nombre = getString(formData, "nombredelcliente").trim();  
     const fecha = getString(formData, "fecha").trim();
+    const hora = getString(formData, "hora").trim();
+    const correo = getString(formData, "correoelectronico").trim();
     /**
      * @type {
         import("./tipos.js").
                 Evento} */
     const modelo = {
       nombre, 
-      tipo,
-      invitados,
-      fecha
+      fecha,
+      hora,
+      correo
     };
     await daoCitas.doc(id).set(modelo);
     muestraEventos();
