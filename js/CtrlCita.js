@@ -7,7 +7,7 @@ import {
   muestraError
 } from "../lib/util.js";
 import {
-  muestraEventos
+  muestraCitas
 } from "./navegacion.js";
 import {
   tieneRol
@@ -40,7 +40,7 @@ async function busca() {
       /**
        * @type {
           import("./tipos.js").
-                  Evento} */
+                  Cita} */
       const data = doc.data();
       forma.nombredelcliente.value = data.nombre;
       forma.fecha.value = data.fecha  || "";
@@ -54,7 +54,7 @@ async function busca() {
     }
   } catch (e) {
     muestraError(e);
-    muestraEventos();
+    muestraCitas();
   }
 }
 
@@ -70,7 +70,7 @@ async function guarda(evt) {
     /**
      * @type {
         import("./tipos.js").
-                Evento} */
+                Cita} */
     const modelo = {
       nombre, 
       fecha,
@@ -78,7 +78,7 @@ async function guarda(evt) {
       correo
     };
     await daoCitas.doc(id).set(modelo);
-    muestraEventos();
+    muestraCitas();
   } catch (e) {
     muestraError(e);
   }
@@ -91,7 +91,7 @@ async function elimina() {
       await daoCitas.
         doc(id).
         delete();
-      muestraEventos();
+      muestraCitas();
     }
   } catch (e) {
     muestraError(e);
