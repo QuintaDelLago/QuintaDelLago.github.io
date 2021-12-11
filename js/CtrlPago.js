@@ -7,13 +7,13 @@ import {
   muestraError
 } from "../lib/util.js";
 import {
-  muestraCitas
+  muestraPagos
 } from "./navegacion.js";
 import {
   tieneRol
 } from "./seguridad.js";
 
-const daoCitas = getFirestore().collection("Citas");
+const daoPagos = getFirestore().collection("Pagos");
 const params = new URL(location.href).searchParams;
 const id = params.get("id");
 /** @type {HTMLFormElement} */
@@ -35,17 +35,21 @@ async function protege(usuario) {
  * corresponden al id recibido. */
 async function busca() {
   try {
-    const doc = await daoCitas.doc(id).get();
+    const doc = await daoPagos.doc(id).get();
     if (doc.exists) {
       /**
        * @type {
           import("./tipos.js").
-                  Cita} */
+                  Pago} */
       const data = doc.data();
       forma.nombredelcliente.value = data.nombre;
+      forma.tipodeevento.value = data.tipo  || ""
+      forma.paquete.value = data.paquete   || "";
+      forma.numerodeinvitados.value = data.invitados  || "";
+      forma.montoapagar.value = data.mapagar  || "";
+      forma.montopagado.value = data.mpagado  || "";
+      forma.faltante.value = data.faltante  || "";
       forma.fecha.value = data.fecha  || "";
-      forma.hora.value = data.hora || "";
-      forma.correoelectronico.value = data.correo || "";
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
     } else {
@@ -54,7 +58,7 @@ async function busca() {
     }
   } catch (e) {
     muestraError(e);
-    muestraCitas();
+    muestraPagos();
   }
 }
 
@@ -63,22 +67,30 @@ async function guarda(evt) {
   try {
     evt.preventDefault();
     const formData = new FormData(forma);
-    const nombre = getString(formData, "nombredelcliente").trim();  
+    const nombre = getString(formData, "nombredelciente").trim();  
+    const tipo = getString(formData, "tipodeevento").trim();
+    const paquete = getString(formData, "paquete").trim();  
+    const invitados = getString(formData, "numerodeinvitados").trim();
+    const mapagar = getString(formData, "montoapagar").trim();
+    const mpagado = getString(formData, "montopagado").trim();
+    const faltante = getString(formData, "faltante").trim();
     const fecha = getString(formData, "fecha").trim();
-    const hora = getString(formData, "hora").trim();
-    const correo = getString(formData, "correoelectronico").trim();
     /**
      * @type {
         import("./tipos.js").
-                Cita} */
+                Pago} */
     const modelo = {
-      nombre, 
+      nombre,
+      tipo,
+      paquete,
+      invitados,
+      mapagar,
+      mpagado,
+      faltante, 
       fecha,
-      hora,
-      correo
     };
-    await daoCitas.doc(id).set(modelo);
-    muestraCitas();
+    await daoPagos.doc(id).set(modelo);
+    muestraPagos();
   } catch (e) {
     muestraError(e);
   }
@@ -88,10 +100,10 @@ async function elimina() {
   try {
     if (confirm("Confirmar la " +
       "eliminación")) {
-      await daoCitas.
+      await daoPagos.
         doc(id).
         delete();
-      muestraCitas();
+      muestraPagos();
     }
   } catch (e) {
     muestraError(e);

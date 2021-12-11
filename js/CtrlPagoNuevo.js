@@ -7,15 +7,15 @@ import {
   muestraError
 } from "../lib/util.js";
 import {
-  muestraCitas
+  muestraPagos
 } from "./navegacion.js";
 import {
   tieneRol
 } from "./seguridad.js";
 
-const daoCitas =
+const daoPagos =
   getFirestore().
-    collection("Citas");
+    collection("Pagos");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 getAuth().onAuthStateChanged(protege, muestraError);
@@ -35,22 +35,30 @@ async function guarda(evt) {
   try {
     evt.preventDefault();
     const formData = new FormData(forma);
-    const nombre = getString(formData, "nombredelcliente").trim();  
+    const nombre = getString(formData, "nombredelciente").trim();  
+    const tipo = getString(formData, "tipodeevento").trim();
+    const paquete = getString(formData, "paquete").trim();  
+    const invitados = getString(formData, "numerodeinvitados").trim();
+    const mapagar = getString(formData, "montoapagar").trim();
+    const mpagado = getString(formData, "montopagado").trim();
+    const faltante = getString(formData, "faltante").trim();
     const fecha = getString(formData, "fecha").trim();
-    const hora = getString(formData, "hora").trim();
-    const correo = getString(formData, "correoelectronico").trim();
     /**
      * @type {
-        import("./tipos.js").Cita} */
+        import("./tipos.js").Pago} */
     const modelo = {
-      nombre, 
+      nombre,
+      tipo,
+      paquete,
+      invitados,
+      mapagar,
+      mpagado,
+      faltante, 
       fecha,
-      hora,
-      correo
     };
-    await daoCitas.
+    await daoPagos.
       add(modelo);
-    muestraCitas();
+    muestraPagos();
   } catch (e) {
     muestraError(e);
   }

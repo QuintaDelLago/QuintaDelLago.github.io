@@ -13,9 +13,9 @@ import {
 /** @type {HTMLUListElement} */
 const lista = document.
   querySelector("#lista");
-const daoCitas =
+const daoPagos =
   getFirestore().
-    collection("Citas");
+    collection("Pagos");
 
 getAuth().
   onAuthStateChanged(
@@ -32,7 +32,7 @@ async function protege(usuario) {
 }
 
 function consulta() {
-  daoCitas.
+  daoPagos.
     orderBy("fecha")
     .onSnapshot(
       htmlLista, errConsulta);
@@ -50,8 +50,7 @@ function htmlLista(snap) {
   } else {
     html += /* html */
       `<li class="vacio">
-        -- No hay citas
-        registradas. --
+        -- No hay pagos pendientes. --
       </li>`;
   }
   lista.innerHTML = html;
@@ -64,10 +63,10 @@ function htmlLista(snap) {
 function htmlFila(doc) {
   /**
    * @type {import("./tipos.js").
-                  Cita} */
+                  Pago} */
   const data = doc.data();
   const nombre = cod(data.nombre);
-  const hora = cod(data.hora);
+  const faltante = cod(data.faltante);
   var fsf= cod(data.fecha);
   var fecha = new Date(fsf);
   var espacio="[   -   ]";
@@ -78,9 +77,9 @@ function htmlFila(doc) {
   return ( /* html */
     `<li>
       <a class="fila" href=
-  "cita.html?${parámetros}">
+  "pago.html?${parámetros}">
         <strong class="primario">
-          ${nombre} ${dformat} ${hora}
+          ${nombre} ${faltante} ${dformat}
         </strong>
       </a>
      
