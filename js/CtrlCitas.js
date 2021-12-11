@@ -51,7 +51,7 @@ function htmlLista(snap) {
     html += /* html */
       `<li class="vacio">
         -- No hay citas
-        registrados. --
+        registradas. --
       </li>`;
   }
   lista.innerHTML = html;
@@ -80,7 +80,7 @@ function htmlFila(doc) {
       <a class="fila" href=
   "cita.html?${parámetros}">
         <strong class="primario">
-          ${nombre} ${dformat} ${fecha}
+          ${nombre} ${dformat} ${hora}
         </strong>
       </a>
      
