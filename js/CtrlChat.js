@@ -7,13 +7,11 @@ import {
   getString,
   muestraError
 } from "../lib/util.js";
-import {
-  tieneRol
-} from "./seguridad.js";
 
 const daoMensaje = getFirestore().
   collection("Mensaje");
 let usuarioId = "";
+let nombreusuario = "";
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 /** @type {HTMLUListElement} */
@@ -28,6 +26,7 @@ getAuth().onAuthStateChanged(
     usuario */
 async function obtiene(usuario) {
     usuarioId = usuario.email;
+    nombreusuario = usuario.displayName;
     consulta();
     forma.addEventListener(
       "submit", agrega);
@@ -53,6 +52,7 @@ async function agrega(evt) {
         "./tipos.js").Mensaje} */
     const modelo = {
       usuarioId,
+      nombreusuario,
       texto,
       timestamp
     };
@@ -145,7 +145,7 @@ function htmlFila(doc) {
   return ( /* html */
     `<li class="fila">
       <strong class="primario">
-        ${cod(data.usuarioId)}
+        ${cod(data.nombreusuario)}
       </strong>
       <span class="secundario">
         ${cod(data.texto)}
