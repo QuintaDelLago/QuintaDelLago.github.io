@@ -15,8 +15,3 @@ export function
   location.href =
     "pagos.html";
 }
-
-export function
-  muestraUsuarios() {
-  location.href = "usuarios.html";
-}
