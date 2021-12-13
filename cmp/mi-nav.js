@@ -14,10 +14,7 @@ class MiNav extends HTMLElement {
     this.innerHTML = /* html */
       `<ul>
         <li>
-          <a href="index.html">Sesión</a>
-          <li>
-            <a href="galeria.html">Galería</a>
-          </li>
+          <a href="index.html">Galería</a>
         </li>
       </ul>`;
     this.ul = this.querySelector("ul");
