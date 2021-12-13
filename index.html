@@ -5,33 +5,19 @@
   <meta name="viewport"
     content="width=device-width,
        initial-scale=1.0">
-  <title>Sesión</title>
-  <!--
-    Carga el núcleo de Firebase
-    JS SDK
-  -->
+  <title>Galería</title>
   <script
     src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js">
     </script>
-  <!--
-    Agrega el manejo de
-    autenticación.
-  -->
   <script
     src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js">
     </script>
-  <!--
-    Agrega el manejo de bases de
-    datos.
-  -->
   <script
     src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js">
     </script>
-  <!--
-    Configura la app usando la
-    información del sitio de
-    Firebase.
-  -->
+  <script
+    src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js">
+    </script>
   <script src="js/init.js">
   </script>
   <script type="module"
@@ -47,44 +33,52 @@
     href="css/estilos.css">
 </head>
 <body>
- <form name="forma">
-    <mi-nav></mi-nav>
-    <header>
-      <h1>Sesión</h1>
-      <div class="herramientas">
-        <button
-          type="button"
-          name="terminarSesión">
-          Terminar Sesión
-        </button>
-      </div>
-    </header>
-    <figure>
-      <img id="avatar" src=""
-        alt="Avatar">
-    </figure>
-    <p>
-      <label>
-        Email
-        <output name="email">
-          <mi-progreso>
-          </mi-progreso>
-        </output>
-      </label>
-    </p>
-    <p>
-      <label>
-        Nombre
-        <output name="nombre">
-          <mi-progreso>
-          </mi-progreso>
-        </output>
-      </label>
-    </p>
+  <mi-nav></mi-nav>
+  <header>
+    <h1>Galería</h1>
+    <img src="imagenes/1.jpg"
+     width="200"
+     height="141">
+     <img src="imagenes/2.jpg"
+     width="200"
+     height="141">
+     <img src="imagenes/3.jpg"
+     width="200"
+     height="141">
+     <div>
+      <img src="imagenes/4.jpg"
+      width="200"
+      height="141">
+      <img src="imagenes/5.jpg"
+      width="200"
+      height="141">
+      <img src="imagenes/6.jpg"
+      width="200"
+      height="141">
+     </div>
+     <div>
+      <img src="imagenes/7.jpg"
+      width="200"
+      height="141">
+      <img src="imagenes/8.jpg"
+      width="200"
+      height="141">
+      <img src="imagenes/9.jpg"
+      width="200"
+      height="141">
+     </div>
+     <div>
+      <img src="imagenes/10.jpg"
+      width="200"
+      height="141">
+      <img src="imagenes/11.jpg"
+      width="200"
+      height="141">
+      <img src="imagenes/12.jpg"
+      width="200"
+      height="141">
+     </div>
     <mi-footer></mi-footer>
-  </form>
-  <script type="module"
-    src="js/CtrlSesion.js">
     </script>
 </body>
 </html>
