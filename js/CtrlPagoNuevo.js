@@ -24,6 +24,7 @@ var formageneral = document.getElementById("forma"),
 
 formageneral["calcularapagar"].addEventListener("click", pago, false);
 formageneral["calcularfaltante"].addEventListener("click", faltapagar, false);
+formageneral["guardar"].addEventListener("click", guarda, false);
 function pago() {
     try {
         valida(isNaN(numinvitados.value) || numinvitados.value<=0,"Ingrese el número de invitados");
@@ -58,7 +59,7 @@ const daoPagos =
     collection("Pagos");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-formageneral["guardar"].addEventListener("submit", guarda);
+
 
 /** @param {import(
     "../lib/tiposFire.js").User}
