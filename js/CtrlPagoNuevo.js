@@ -13,7 +13,6 @@ import {
   tieneRol
 } from "./seguridad.js";
 
-
 "use strict";
 var formageneral = document.getElementById("forma"),
     spnpaquete = document.getElementById("paquete"),
@@ -54,17 +53,20 @@ function valida(cond, mensaje){
     }
 }
 
-const daoPagos =
-  getFirestore().
-    collection("Pagos");
+const daoPagos = getFirestore().collection("Pagos");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-
+getAuth().onAuthStateChanged(protege, muestraError);
 
 /** @param {import(
     "../lib/tiposFire.js").User}
     usuario */
-
+async function protege(usuario) {
+  if (tieneRol(usuario,
+    ["Administrador"])) {
+    forma.addEventListener("click", guarda);
+  }
+}
 
 /** @param {Event} evt */
 async function guarda(evt) {
