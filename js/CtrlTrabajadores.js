@@ -31,11 +31,18 @@ import {
     daoTrabajadores.orderBy("nombre").
       onSnapshot(
         snap => {
-          let html = SIN_TRABAJADORES;
-          snap.forEach(doc =>
-            html += htmlTrabajador(
-              doc, valor));
-          select.innerHTML = html;
+          let html = "";
+          if (snap.size > 0) {
+            snap.forEach(doc =>
+              html += htmlTrabajador(doc, valor));
+            select.innerHTML = html;
+          } else {
+            html += /* html */
+              `<li class="vacio">
+                -- No hay trabajadores
+                registrados. --
+              </li>`;
+          }
         },
         e => {
           muestraError(e);
@@ -44,7 +51,7 @@ import {
         }
       );
   }
-  
+
   /**
    * @param {
     import("../lib/tiposFire.js").
