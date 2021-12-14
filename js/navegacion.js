@@ -21,3 +21,9 @@ export function
   location.href =
     "trabajadores.html";
 }
+
+export function
+  muestraConvenios() {
+  location.href =
+    "convenios.html";
+}

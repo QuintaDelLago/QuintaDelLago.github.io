@@ -11,11 +11,7 @@ import {
     muestraTrabajadores
   } from "./navegacion.js";
   
-  const SIN_TRABAJADORES = /* html */
-    `<option value="">
-      -- Sin Trabajadores --
-    </option>`;
-  
+ 
   const firestore = getFirestore();
   const daoTrabajadores = firestore.collection("Trabajadores");
 

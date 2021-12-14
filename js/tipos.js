@@ -31,6 +31,13 @@
  * @property {string} telefono
  */
 
+/**
+ * @typedef {Object} Convenio
+ * @property {string} nombreempresa
+ * @property {string} servicio
+ * @property {string} telefono
+ */
+
 // @ts-nocheck
 /**
  * @typedef {Object} Mensaje

@@ -9,16 +9,16 @@ import {
   muestraError
 } from "../lib/util.js";
 import {
-  muestraTrabajadores
+  muestraConvenios
 } from "./navegacion.js";
 import {
-  guardaTrabajador,
-  selectTrabajadores
-} from "./CtrlTrabajadores.js";
+  guardaConvenio,
+  selectConvenios
+} from "./CtrlConvenios.js";
 
 const params = new URL(location.href).searchParams;
 const id = params.get("id");
-const daoTrabajadores = getFirestore().collection("Trabajadores");
+const daoConvenios = getFirestore().collection("Convenios");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 const img = document.querySelector("img");
@@ -28,12 +28,12 @@ busca();
 
 async function busca() {
   try {
-    const doc = await daoTrabajadores.doc(id).get();
+    const doc = await daoConvenios.doc(id).get();
     if (doc.exists) {
       const data = doc.data();
       forma.cue.value = id || "";
       img.src = await urlStorage(id);
-      selectTrabajadores(
+      selectConvenios(
         forma.telefono,
         data.telefono)
       forma.addEventListener(
@@ -44,13 +44,13 @@ async function busca() {
     }
   } catch (e) {
     muestraError(e);
-    muestraTrabajadores();
+    muestraConvenios();
   }
 }
 
 /** @param {Event} evt */
 async function guarda(evt) {
-  await guardaTrabajador(evt,
+  await guardaConvenio(evt,
     new FormData(forma), id);
 }
 
@@ -58,9 +58,9 @@ async function elimina() {
   try {
     if (confirm("Confirmar la " +
       "eliminación")) {
-      await daoTrabajadores.doc(id).delete();
+      await daoConvenios.doc(id).delete();
       await eliminaStorage(id);
-      muestraTrabajadores();
+      muestraConvenios();
     }
   } catch (e) {
     muestraError(e);
