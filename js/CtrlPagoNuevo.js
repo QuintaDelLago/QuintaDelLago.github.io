@@ -58,17 +58,12 @@ const daoPagos =
     collection("Pagos");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-getAuth().onAuthStateChanged(protege, muestraError);
+formageneral["guardar"].addEventListener("submit", guarda);
 
 /** @param {import(
     "../lib/tiposFire.js").User}
     usuario */
-async function protege(usuario) {
-  if (tieneRol(usuario,
-    ["Administrador"])) {
-    formageneral["guardar"].addEventListener("submit", guarda);
-  }
-}
+
 
 /** @param {Event} evt */
 async function guarda(evt) {
