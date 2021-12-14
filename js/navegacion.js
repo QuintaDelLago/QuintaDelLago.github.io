@@ -15,3 +15,9 @@ export function
   location.href =
     "pagos.html";
 }
+
+export function
+  muestraTrabajadores() {
+  location.href =
+    "trabajadores.html";
+}

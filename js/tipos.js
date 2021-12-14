@@ -24,6 +24,13 @@
  * @property {string} alumnoId
  */
 
+/**
+ * @typedef {Object} Trabajador
+ * @property {string} nombre
+ * @property {string} puesto
+ * @property {string} telefono
+ */
+
 // @ts-nocheck
 /**
  * @typedef {Object} Mensaje
