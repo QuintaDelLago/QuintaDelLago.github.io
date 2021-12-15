@@ -1,25 +1,58 @@
 import {
-  getString
+  getAuth,
+  getFirestore
+} from "../lib/fabrica.js";
+import {
+  getString,
+  muestraError
 } from "../lib/util.js";
 import {
-  guardaConvenio,
-  selectConvenios
-} from "./CtrlConvenios.js";
+  muestraEventos
+} from "./navegacion.js";
+import {
+  tieneRol
+} from "./seguridad.js";
 
+const daoConvenios =
+  getFirestore().
+    collection("Convenios");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-/** @type {HTMLUListElement} */
+getAuth().onAuthStateChanged(protege, muestraError);
 
 /** @param {import(
     "../lib/tiposFire.js").User}
     usuario */
-forma.addEventListener("submit", guarda);
-    selectConvenios(forma.numerodetelefono, "");
-
+async function protege(usuario) {
+  if (tieneRol(usuario,
+    ["Administrador"])) {
+    forma.addEventListener("submit", guarda);
+  }
+}
 
 /** @param {Event} evt */
 async function guarda(evt) {
-  const formData = new FormData(forma);
-  const id = getString(formData, "telefono").trim();
-  await guardaConvenio(evt,formData, id);
+  try {
+    evt.preventDefault();
+    const formData = new FormData(forma);
+    const nombre = getString(formData, "nombreempresa").trim();  
+    const servicio = getString(formData, "servicio").trim();
+    const encargado = getString(formData, "encargado").trim();
+    const telefono = getString(formData, "telefono").trim();
+    /**
+     * @type {
+        import("./tipos.js").Convenio} */
+    const modelo = {
+      nombre, 
+      servicio,
+      encargado,
+      telefono
+    };
+    await daoConvenios.
+      add(modelo);
+    muestraEventos();
+  } catch (e) {
+    muestraError(e);
+  }
 }
+

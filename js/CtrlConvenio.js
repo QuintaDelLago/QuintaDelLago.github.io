@@ -1,46 +1,56 @@
 import {
+  getAuth,
   getFirestore
 } from "../lib/fabrica.js";
 import {
-  eliminaStorage,
-  urlStorage
-} from "../lib/storage.js";
-import {
+  getString,
   muestraError
 } from "../lib/util.js";
 import {
   muestraConvenios
 } from "./navegacion.js";
 import {
-  guardaConvenio,
-  selectConvenios
-} from "./CtrlConvenios.js";
+  tieneRol
+} from "./seguridad.js";
 
+const daoConvenios = getFirestore().collection("Convenios");
 const params = new URL(location.href).searchParams;
 const id = params.get("id");
-const daoConvenios = getFirestore().collection("Convenios");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-const img = document.querySelector("img");
-/** @type {HTMLUListElement} */
-busca();
 
+getAuth().onAuthStateChanged(protege, muestraError);
 
+/** @param {import(
+    "../lib/tiposFire.js").User}
+    usuario */
+async function protege(usuario) {
+  if (tieneRol(usuario,
+    ["Administrador"])) {
+    busca();
+  }
+}
+
+/** Busca y muestra los datos que
+ * corresponden al id recibido. */
 async function busca() {
   try {
     const doc = await daoConvenios.doc(id).get();
     if (doc.exists) {
+      /**
+       * @type {
+          import("./tipos.js").
+                  Convenio} */
       const data = doc.data();
-      forma.cue.value = id || "";
-      img.src = await urlStorage(id);
-      selectConvenios(
-        forma.telefono,
-        data.telefono)
-      forma.addEventListener(
-        "submit", guarda);
-      forma.eliminar.
-        addEventListener(
-          "click", elimina);
+      forma.nombreempresa.value = data.nombre;
+      forma.servicio.value = data.servicio  || "";
+      forma.encargado.value = data.encargado || "";
+      forma.telefono.value = data.telefono || "";
+      forma.addEventListener("submit", guarda);
+      forma.eliminar.addEventListener("click", elimina);
+    } else {
+      throw new Error(
+        "No se encontró.");
     }
   } catch (e) {
     muestraError(e);
@@ -50,8 +60,28 @@ async function busca() {
 
 /** @param {Event} evt */
 async function guarda(evt) {
-  await guardaConvenio(evt,
-    new FormData(forma), id);
+  try {
+    evt.preventDefault();
+    const formData = new FormData(forma);
+    const nombre = getString(formData, "nombreempresa").trim();  
+    const servicio = getString(formData, "servicio").trim();
+    const encargado = getString(formData, "encargado").trim();
+    const telefono = getString(formData, "telefono").trim();
+    /**
+     * @type {
+        import("./tipos.js").
+                Convenio} */
+    const modelo = {
+      nombre, 
+      servicio,
+      encargado,
+      telefono
+    };
+    await daoConvenios.doc(id).set(modelo);
+    muestraConvenios();
+  } catch (e) {
+    muestraError(e);
+  }
 }
 
 async function elimina() {
@@ -59,10 +89,10 @@ async function elimina() {
     if (confirm("Confirmar la " +
       "eliminación")) {
       await daoConvenios.doc(id).delete();
-      await eliminaStorage(id);
       muestraConvenios();
     }
   } catch (e) {
     muestraError(e);
   }
 }
+

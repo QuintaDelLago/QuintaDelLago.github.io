@@ -1,86 +1,92 @@
 import {
+  getAuth,
   getFirestore
 } from "../lib/fabrica.js";
 import {
-  cod, getForánea, muestraError
+  cod,
+  muestraError
 } from "../lib/util.js";
 import {
-  muestraConvenios
-} from "./navegacion.js";
+  tieneRol
+} from "./seguridad.js";
 
-const firestore = getFirestore();
-const daoConvenios = firestore.collection("Convenios");
+/** @type {HTMLUListElement} */
+const lista = document.
+  querySelector("#lista");
+const daoAlumno =
+  getFirestore().
+    collection("Eventos");
 
+getAuth().
+  onAuthStateChanged(
+    protege, muestraError);
 
-/**
- * @param {
-    HTMLSelectElement} select
- * @param {string} valor */
-export function
-  selectConvenios(select,
-    valor) {
-  valor = valor || "";
-  daoConvenios.orderBy("nombre").
-    onSnapshot(
-      snap => {
-        let html = "";
-        if (snap.size > 0) {
-          snap.forEach(doc =>
-            html += htmlConvenio(doc, valor));
-          select.innerHTML = html;
-        } else {
-          html += /* html */
-            `<li class="vacio">
-              -- No hay convenios
-              registrados. --
-            </li>`;
-        }
-      },
-      e => {
-        muestraError(e);
-        selectConvenios(
-          select, valor);
-      }
-    );
+/** @param {import(
+    "../lib/tiposFire.js").User}
+    usuario */
+async function protege(usuario) {
+  if (tieneRol(usuario,
+    ["Administrador"])) {
+    consulta();
+  }
+}
+
+function consulta() {
+  daoAlumno.
+    orderBy("nombre")
+    .onSnapshot(
+      htmlLista, errConsulta);
 }
 
 /**
- * @param {
-  import("../lib/tiposFire.js").
-  DocumentSnapshot} doc
- * @param {string} valor */
-function
-  htmlConvenio(doc, valor) {
-  const selected =
-    doc.id === valor ?
-      "selected" : "";
+ * @param {import(
+    "../lib/tiposFire.js").
+    QuerySnapshot} snap */
+function htmlLista(snap) {
+  let html = "";
+  if (snap.size > 0) {
+    snap.forEach(doc =>
+      html += htmlFila(doc));
+  } else {
+    html += /* html */
+      `<li class="vacio">
+        -- No hay convenios
+        registrados. --
+      </li>`;
+  }
+  lista.innerHTML = html;
+}
+
+/**
+ * @param {import(
+    "../lib/tiposFire.js").
+    DocumentSnapshot} doc */
+function htmlFila(doc) {
   /**
    * @type {import("./tipos.js").
                   Convenio} */
-  const data = doc.data();}
+  const data = doc.data();
+  const nombre = cod(data.nombreempresa);
+  const servicio = cod(data.servicio);
+  const telefono= cod(data.telefono);
+  const encargado= cod(data.encargado);
+  const parámetros =
+    new URLSearchParams();
+  parámetros.append("id", doc.id);
+  return ( /* html */
+    `<li>
+      <a class="fila" href=
+  "convenio.html?${parámetros}">
+        <strong class="primario">
+          ${nombre} ${servicio} ${encargado} ${telefono}
+        </strong>
+      </a>
+     
+    </li>`);
+}
 
-
-/**
- * @param {Event} evt
- * @param {FormData} formData
- * @param {string} id  */
-export async function
-  guardaConvenio(evt, formData,
-    id) {
-  try {
-    evt.preventDefault();
-    const trabajadorId = getForánea(formData, "telefono");
-    const nombre = formData.get("nombre");
-    const puesto = formData.get("puesto");
-    await daoConvenios.
-      doc(id).
-      set({
-        nombre,
-        puesto,
-        trabajadorId
-      });
-    muestraConvenios();
-  } catch (e) {
-    muestraError(e);
-  }
+/** @param {Error} e */
+function errConsulta(e) {
+  muestraError(e);
+  consulta();
 }

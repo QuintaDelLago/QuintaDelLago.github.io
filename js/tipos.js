@@ -33,9 +33,10 @@
 
 /**
  * @typedef {Object} Convenio
- * @property {string} nombreempresa
+ * @property {string} nombre
  * @property {string} servicio
  * @property {string} telefono
+ * @property {string} encargado
  */
 
 // @ts-nocheck
