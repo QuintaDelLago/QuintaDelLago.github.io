@@ -25,11 +25,8 @@ getAuth().onAuthStateChanged(
 async function
   muestraSesión(usuario) {
   if (usuario && usuario.email) {
-    forma.terminarSesión.
-      addEventListener(
-        "click", terminaSesión);
+    forma.termina.addEventListener("click", terminaSesión, false);
   } else {
-    // No ha iniciado sesión.
     iniciaSesión();
   }
 }
