@@ -63,8 +63,6 @@ async function guarda(evt) {
   }
 }
 
-
-"use strict";
 var formageneral = document.getElementById("forma"),
     spnpaquete = document.getElementById("paquete"),
     numinvitados = document.getElementById("numerodeinvitados"),
