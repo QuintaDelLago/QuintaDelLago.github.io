@@ -28,9 +28,7 @@ async function
   muestraSesión(usuario) {
   if (usuario && usuario.email) {
     // Usuario aceptado.
-    forma.termina.
-      addEventListener(
-        "click", terminaSesión);
+    forma.termina.addEventListener("submit", terminaSesión);
   } else {
     // No ha iniciado sesión.
     iniciaSesión();
