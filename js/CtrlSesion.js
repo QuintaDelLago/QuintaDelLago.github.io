@@ -15,7 +15,9 @@ const forma = document["forma"];
 getAuth().onAuthStateChanged(
   muestraSesión, muestraError);
 
-/** 
+/** Muestra los datos del usuario
+ * o manda a iniciar sesión en
+ * caso de que no haya empezado.
  * @param {import(
     "../lib/tiposFire").
     User} usuario modelo con las
@@ -25,8 +27,12 @@ getAuth().onAuthStateChanged(
 async function
   muestraSesión(usuario) {
   if (usuario && usuario.email) {
-    forma.termina.addEventListener("click", terminaSesión, false);
+    // Usuario aceptado.
+    forma.termina.
+      addEventListener(
+        "click", terminaSesión);
   } else {
+    // No ha iniciado sesión.
     iniciaSesión();
   }
 }
