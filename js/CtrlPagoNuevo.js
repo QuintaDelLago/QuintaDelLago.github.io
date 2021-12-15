@@ -13,8 +13,9 @@ import {
   tieneRol
 } from "./seguridad.js";
 
-
-const daoPagos = getFirestore().collection("Pagos");
+const daoPagos =
+  getFirestore().
+    collection("Pagos");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 getAuth().onAuthStateChanged(protege, muestraError);
@@ -28,6 +29,7 @@ async function protege(usuario) {
     forma.addEventListener("submit", guarda);
   }
 }
+
 
 /** @param {Event} evt */
 async function guarda(evt) {
@@ -62,6 +64,8 @@ async function guarda(evt) {
     muestraError(e);
   }
 }
+
+
 /**
 var formageneral = document.getElementById("forma"),
     spnpaquete = document.getElementById("paquete"),
