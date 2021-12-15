@@ -16,6 +16,12 @@ class MiNav extends HTMLElement {
         <li>
           <a href="index.html">Galería</a>
         </li>
+        <li>
+          <a href="preguntasfrecuentesexternos.html">Preguntas</a>
+        </li>
+        <li>
+          <a href="contacto.html">Contacto</a>
+        </li>
       </ul>`;
     this.ul = this.querySelector("ul");
     getAuth().onAuthStateChanged(usuario => this.cambiaUsuario(usuario), muestraError);
@@ -46,7 +52,7 @@ class MiNav extends HTMLElement {
                 <a href="trabajadores.html">Trabajadores</a>
               </li>
               <li>
-                <a href="preguntasfrecuentes.html">Preguntas</a>
+                <a href="preguntasfrecuentes.html">Gestionar preguntas</a>
               </li>
               <li>
                 <a href="pagos.html">Pagos</a>
@@ -64,7 +70,7 @@ class MiNav extends HTMLElement {
                 <a href="pagoscliente.html">Pagos</a>
               </li>
               <li>
-                <a href="preguntasfrecuentes.html">Preguntas</a>
+                <a href="preguntasfrecuentes.html">Haz tu pregunta</a>
               </li>
               <li>
                 <a href="paquetes.html">Paquetes</a>
@@ -79,15 +85,6 @@ class MiNav extends HTMLElement {
               <li>
                 <a href="paquetes.html">Paquetes</a>
               </li>`;
-          }
-          if (roles.has("Espectador")) {
-            html += /* html */
-            `<li>
-                <a href="preguntasfrecuentesexternos.html">Preguntas</a>
-            </li>
-            <li>
-                <a href="contacto.html">Contacto</a>
-            </li>`;
           }
           this.ul.innerHTML += html;
         }
