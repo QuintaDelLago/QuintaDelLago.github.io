@@ -25,7 +25,7 @@ getAuth().onAuthStateChanged(protege, muestraError);
 async function protege(usuario) {
   if (tieneRol(usuario,
     ["Administrador"])) {
-    formageneral["guardar"].addEventListener("click", guarda, false);
+    forma.addEventListener("submit", guarda);
   }
 }
 
@@ -62,7 +62,7 @@ async function guarda(evt) {
     muestraError(e);
   }
 }
-
+/**
 var formageneral = document.getElementById("forma"),
     spnpaquete = document.getElementById("paquete"),
     numinvitados = document.getElementById("numerodeinvitados"),
@@ -102,3 +102,4 @@ function valida(cond, mensaje){
   }
 }
 
+*/
