@@ -1,46 +1,56 @@
 import {
+  getAuth,
   getFirestore
 } from "../lib/fabrica.js";
 import {
-  eliminaStorage,
-  urlStorage
-} from "../lib/storage.js";
-import {
+  getString,
   muestraError
 } from "../lib/util.js";
 import {
   muestraTrabajadores
 } from "./navegacion.js";
 import {
-  guardaTrabajador,
-  selectTrabajadores
-} from "./CtrlTrabajadores.js";
+  tieneRol
+} from "./seguridad.js";
 
+const daoTrabajadores = getFirestore().collection("Trabajadores");
 const params = new URL(location.href).searchParams;
 const id = params.get("id");
-const daoTrabajadores = getFirestore().collection("Trabajadores");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-const img = document.querySelector("img");
-/** @type {HTMLUListElement} */
-busca();
 
+getAuth().onAuthStateChanged(protege, muestraError);
 
+/** @param {import(
+    "../lib/tiposFire.js").User}
+    usuario */
+async function protege(usuario) {
+  if (tieneRol(usuario,
+    ["Administrador"])) {
+    busca();
+  }
+}
+
+/** Busca y muestra los datos que
+ * corresponden al id recibido. */
 async function busca() {
   try {
     const doc = await daoTrabajadores.doc(id).get();
     if (doc.exists) {
+      /**
+       * @type {
+          import("./tipos.js").
+                  Trabajador} */
       const data = doc.data();
-      forma.cue.value = id || "";
-      img.src = await urlStorage(id);
-      selectTrabajadores(
-        forma.telefono,
-        data.telefono)
-      forma.addEventListener(
-        "submit", guarda);
-      forma.eliminar.
-        addEventListener(
-          "click", elimina);
+      forma.nombredeltrabajador.value = data.nombre;
+      forma.puesto.value = data.puesto  || "";
+      forma.telefono.value = data.telefono || "";
+      forma.avatar.value = data.avatar || "";
+      forma.addEventListener("submit", guarda);
+      forma.eliminar.addEventListener("click", elimina);
+    } else {
+      throw new Error(
+        "No se encontró.");
     }
   } catch (e) {
     muestraError(e);
@@ -50,8 +60,28 @@ async function busca() {
 
 /** @param {Event} evt */
 async function guarda(evt) {
-  await guardaTrabajador(evt,
-    new FormData(forma), id);
+  try {
+    evt.preventDefault();
+    const formData = new FormData(forma);
+    const nombre = getString(formData, "nombredeltrabajador").trim();  
+    const puesto = getString(formData, "puesto").trim();
+    const telefono = getString(formData, "telefono").trim();
+    const avatar = getString(formData, "avatar").trim();
+    /**
+     * @type {
+        import("./tipos.js").
+                Trabajador} */
+    const modelo = {
+      nombre, 
+      puesto,
+      telefono,
+      avatar
+    };
+    await daoTrabajadores.doc(id).set(modelo);
+    muestraTrabajadores();
+  } catch (e) {
+    muestraError(e);
+  }
 }
 
 async function elimina() {
@@ -59,10 +89,10 @@ async function elimina() {
     if (confirm("Confirmar la " +
       "eliminación")) {
       await daoTrabajadores.doc(id).delete();
-      await eliminaStorage(id);
       muestraTrabajadores();
     }
   } catch (e) {
     muestraError(e);
   }
 }
+

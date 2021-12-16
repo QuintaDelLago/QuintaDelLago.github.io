@@ -1,99 +1,99 @@
 import {
-    getFirestore
-  } from "../lib/fabrica.js";
-  import {
-    subeStorage
-  } from "../lib/storage.js";
-  import {
-    cod, getForánea, muestraError
-  } from "../lib/util.js";
-  import {
-    muestraTrabajadores
-  } from "./navegacion.js";
-  
- 
-  const firestore = getFirestore();
-  const daoTrabajadores = firestore.collection("Trabajadores");
+  getAuth,
+  getFirestore
+} from "../lib/fabrica.js";
+import {
+  cod,
+  muestraError
+} from "../lib/util.js";
+import {
+  tieneRol
+} from "./seguridad.js";
 
-  
-  /**
-   * @param {
-      HTMLSelectElement} select
-   * @param {string} valor */
-  export function
-    selectTrabajadores(select,
-      valor) {
-    valor = valor || "";
-    daoTrabajadores.orderBy("nombre").
-      onSnapshot(
-        snap => {
-          let html = "";
-          if (snap.size > 0) {
-            snap.forEach(doc =>
-              html += htmlTrabajador(doc, valor));
-            select.innerHTML = html;
-          } else {
-            html += /* html */
-              `<li class="vacio">
-                -- No hay trabajadores
-                registrados. --
-              </li>`;
-          }
-        },
-        e => {
-          muestraError(e);
-          selectTrabajadores(
-            select, valor);
-        }
-      );
-  }
+/** @type {HTMLUListElement} */
+const lista = document.
+  querySelector("#lista");
+const daoAlumno =
+  getFirestore().
+    collection("Trabajadores");
 
-  /**
-   * @param {
-    import("../lib/tiposFire.js").
-    DocumentSnapshot} doc
-   * @param {string} valor */
-  function
-    htmlTrabajador(doc, valor) {
-    const selected =
-      doc.id === valor ?
-        "selected" : "";
-    /**
-     * @type {import("./tipos.js").
-                    Trabajador} */
-    const data = doc.data();
-    return (/* html */
-      `<option
-          value="${cod(doc.id)}"
-          ${selected}>
-        ${cod(data.nombre)}
-      </option>`);
-  }
+getAuth().
+  onAuthStateChanged(
+    protege, muestraError);
 
-  
-  /**
-   * @param {Event} evt
-   * @param {FormData} formData
-   * @param {string} id  */
-  export async function
-    guardaTrabajador(evt, formData,
-      id) {
-    try {
-      evt.preventDefault();
-      const trabajadorId = getForánea(formData, "telefono");
-      const nombre = formData.get("nombre");
-      const puesto = formData.get("puesto");
-      await daoTrabajadores.
-        doc(id).
-        set({
-          nombre,
-          puesto,
-          trabajadorId
-        });
-      const avatar = formData.get("avatar");
-      await subeStorage(id, avatar);
-      muestraTrabajadores();
-    } catch (e) {
-      muestraError(e);
-    }
+/** @param {import(
+    "../lib/tiposFire.js").User}
+    usuario */
+async function protege(usuario) {
+  if (tieneRol(usuario,
+    ["Administrador"])) {
+    consulta();
   }
+}
+
+function consulta() {
+  daoAlumno.
+    orderBy("nombre")
+    .onSnapshot(
+      htmlLista, errConsulta);
+}
+
+/**
+ * @param {import(
+    "../lib/tiposFire.js").
+    QuerySnapshot} snap */
+function htmlLista(snap) {
+  let html = "";
+  if (snap.size > 0) {
+    snap.forEach(doc =>
+      html += htmlFila(doc));
+  } else {
+    html += /* html */
+      `<li class="vacio">
+        -- No hay trabajadores
+        registrados. --
+      </li>`;
+  }
+  lista.innerHTML = html;
+}
+
+/**
+ * @param {import(
+    "../lib/tiposFire.js").
+    DocumentSnapshot} doc */
+function htmlFila(doc) {
+  /**
+   * @type {import("./tipos.js").
+                  Trabajador} */
+  const data = doc.data();
+  const nombre = cod(data.nombre);
+  const puesto = cod(data.puesto);
+  const telefono = cod(data.telefono);
+  const avatar = cod(data.avatar);
+  const parámetros =
+    new URLSearchParams();
+  parámetros.append("id", doc.id);
+  return ( /* html */
+    `<li>
+      <a class="fila" href=
+  "trabajador.html?${parámetros}">
+        <strong class="primario">
+          ${nombre}
+        </strong>
+        <a class="secundario">
+         ${puesto}
+        </a>
+        <strong class="secundario">
+          ${telefono}
+        </strong>
+        <a> ${avatar} </a>
+      </a>     
+    </li>`);
+}
+
+/** @param {Error} e */
+function errConsulta(e) {
+  muestraError(e);
+  consulta();
+}
+
