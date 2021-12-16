@@ -40,7 +40,8 @@ async function busca() {
                   Pago} */
       const data = doc.data();
       forma.nombredelcliente.value = data.nombre;
-      forma.tipodeevento.value = data.tipo  || ""
+      forma.correo.value = data.correo  || "";
+      forma.tipodeevento.value = data.tipo  || "";
       forma.paquete.value = data.precioppersona   || "";
       forma.numerodeinvitados.value = data.invitados  || "";
       forma.montoapagar.value = data.mapagar  || "";
@@ -67,6 +68,7 @@ async function guarda(evt) {
     evt.preventDefault();
     const formData = new FormData(forma);
     const nombre = getString(formData, "nombredelciente").trim();  
+    const correo = getString(formData, "correo").trim();  
     const tipo = getString(formData, "tipodeevento").trim();
     const paquete = getString(formData, "paquete").trim();  
     const invitados = getString(formData, "numerodeinvitados").trim();
@@ -80,6 +82,7 @@ async function guarda(evt) {
                 Pago} */
     const modelo = {
       nombre,
+      correo,
       tipo,
       paquete,
       invitados,
@@ -109,7 +112,7 @@ async function elimina() {
   }
 }
 
-function pago() {
+async function pago() {
   try {
     valida(isNaN(forma.numinvitados.value) || forma.numinvitados.value<=0,"Ingrese el número de invitados");
     var pago = forma.paquete.value * forma.numinvitados.valueAsNumber;
@@ -119,7 +122,7 @@ function pago() {
   }    
   }
   
-  function faltapagar() {
+  async function faltapagar() {
   try {
     valida(isNaN(forma.montoapagar.value) || forma.montoapagar.value<=0,"Primero calcule el monto a pagar");
     valida(isNaN(forma.montopagado.value) || forma.montopagado.value<=0,"Ingrese el monto pagado correctamente");
@@ -132,7 +135,7 @@ function pago() {
   }    
   }
   
-  function valida(cond, mensaje){
+  async function valida(cond, mensaje){
   if(cond){
     throw new Error(mensaje);
   }

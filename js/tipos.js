@@ -16,6 +16,7 @@
 /**
  * @typedef {Object} Pago
  * @property {string} nombre
+ * @property {string} correo
  * @property {string} tipo
  * @property {string} invitados
  * @property {string} fecha
