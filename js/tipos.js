@@ -15,7 +15,14 @@
 
 /**
  * @typedef {Object} Pago
+ * @property {string} nombre
+ * @property {string} tipo
+ * @property {string} invitados
  * @property {string} fecha
+ * @property {string} precioppersona
+ * @property {string} mapagar
+ * @property {string} mpagado
+ * @property {string} falta
  */
 
 /**

@@ -69,7 +69,6 @@ function htmlFila(doc) {
   const faltante = cod(data.faltante);
   var fsf= cod(data.fecha);
   var fecha = new Date(fsf);
-  var espacio="[   -   ]";
   var dformat = [fecha.getDate()+1, fecha.getMonth()+1, fecha.getFullYear()].join('/');
   const parámetros =
     new URLSearchParams();

@@ -13,51 +13,11 @@ import {
   tieneRol
 } from "./seguridad.js";
 
-"use strict";
-var formageneral = document.getElementById("forma"),
-    spnpaquete = document.getElementById("paquete"),
-    numinvitados = document.getElementById("numerodeinvitados"),
-    montoapagar = document.getElementById("montoapagar"),
-    montopagado = document.getElementById("montopagado"),
-    faltante = document.getElementById("faltante");
-
-formageneral["calcularapagar"].addEventListener("click", pago, false);
-formageneral["calcularfaltante"].addEventListener("click", faltapagar, false);
-function pago() {
-    try {
-        valida(isNaN(numinvitados.value) || numinvitados.value<=0,"Ingrese el número de invitados");
-        var pago = spnpaquete.value * numinvitados.valueAsNumber;
-        montoapagar.value = pago;
-    } catch (error) {
-        alert(error.message)  
-    }    
-}
-
-function faltapagar() {
-    try {
-        valida(isNaN(montoapagar.value) || montoapagar.value<=0,"Primero calcule el monto a pagar");
-        valida(isNaN(montopagado.value) || montopagado.value<=0,"Ingrese el monto pagado correctamente");
-        var falta = montoapagar.value - montopagado.valueAsNumber;
-        valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
-        valida(falta==0, "Pago saldado, ya puede eliminar el registro");
-        faltante.value = falta; 
-    } catch (error) {      
-        alert(error.message)  
-    }    
-}
-
-function valida(cond, mensaje){
-    if(cond){
-        throw new Error(mensaje);
-    }
-}
-
 const daoPagos = getFirestore().collection("Pagos");
 const params = new URL(location.href).searchParams;
 const id = params.get("id");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-
 getAuth().onAuthStateChanged(protege, muestraError);
 
 /** @param {import(
@@ -70,8 +30,6 @@ async function protege(usuario) {
   }
 }
 
-/** Busca y muestra los datos que
- * corresponden al id recibido. */
 async function busca() {
   try {
     const doc = await daoPagos.doc(id).get();
@@ -83,14 +41,16 @@ async function busca() {
       const data = doc.data();
       forma.nombredelcliente.value = data.nombre;
       forma.tipodeevento.value = data.tipo  || ""
-      forma.paquete.value = data.paquete   || "";
+      forma.paquete.value = data.precioppersona   || "";
       forma.numerodeinvitados.value = data.invitados  || "";
       forma.montoapagar.value = data.mapagar  || "";
       forma.montopagado.value = data.mpagado  || "";
-      forma.faltante.value = data.faltante  || "";
+      forma.faltante.value = data.falta  || "";
       forma.fecha.value = data.fecha  || "";
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
+      forma.calcularapagar.addEventListener("click", pago);
+    forma.calcularfaltante.addEventListener("click", faltapagar);
     } else {
       throw new Error(
         "No se encontró.");
@@ -148,4 +108,34 @@ async function elimina() {
     muestraError(e);
   }
 }
+
+function pago() {
+  try {
+    valida(isNaN(forma.numinvitados.value) || forma.numinvitados.value<=0,"Ingrese el número de invitados");
+    var pago = forma.paquete.value * forma.numinvitados.valueAsNumber;
+    forma.montoapagar.value = pago;
+  } catch (error) {
+    alert(error.message)  
+  }    
+  }
+  
+  function faltapagar() {
+  try {
+    valida(isNaN(forma.montoapagar.value) || forma.montoapagar.value<=0,"Primero calcule el monto a pagar");
+    valida(isNaN(forma.montopagado.value) || forma.montopagado.value<=0,"Ingrese el monto pagado correctamente");
+    var falta = forma.montoapagar.value - forma.montopagado.valueAsNumber;
+    valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
+    valida(falta==0, "Pago saldado, ya puede eliminar el registro");
+    forma.faltante.value = falta; 
+  } catch (error) {      
+    alert(error.message)  
+  }    
+  }
+  
+  function valida(cond, mensaje){
+  if(cond){
+    throw new Error(mensaje);
+  }
+  }
+
 
