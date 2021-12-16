@@ -26,36 +26,35 @@ getAuth().onAuthStateChanged(protege, muestraError);
 async function protege(usuario) {
   if (tieneRol(usuario,
     ["Administrador"])) {
-    forma.addEventListener("click", guarda);
+    forma.addEventListener("submit", guarda);
   }
 }
-
 
 /** @param {Event} evt */
 async function guarda(evt) {
   try {
     evt.preventDefault();
     const formData = new FormData(forma);
-    const nombre = getString(formData, "nombredelciente").trim();  
+    const nombre = getString(formData, "nombredelcliente").trim();  
     const tipo = getString(formData, "tipodeevento").trim();
-    const paquete = getString(formData, "paquete").trim();  
     const invitados = getString(formData, "numerodeinvitados").trim();
-    const mapagar = getString(formData, "montoapagar").trim();
-    const mpagado = getString(formData, "montopagado").trim();
-    const faltante = getString(formData, "faltante").trim();
     const fecha = getString(formData, "fecha").trim();
+    const precioppersona = getString(formData, "precioppersona");
+    const mapagar = getString(formData, "mapagar");
+    const mpagado = getString(formData, "mpagado");
+    const falta = getString(formData, "falta");
     /**
      * @type {
         import("./tipos.js").Pago} */
     const modelo = {
-      nombre,
+      nombre, 
       tipo,
-      paquete,
       invitados,
+      fecha,
+      precioppersona,
       mapagar,
       mpagado,
-      faltante, 
-      fecha,
+      falta
     };
     await daoPagos.
       add(modelo);
@@ -64,46 +63,3 @@ async function guarda(evt) {
     muestraError(e);
   }
 }
-
-
-/**
-var formageneral = document.getElementById("forma"),
-    spnpaquete = document.getElementById("paquete"),
-    numinvitados = document.getElementById("numerodeinvitados"),
-    montoapagar = document.getElementById("montoapagar"),
-    montopagado = document.getElementById("montopagado"),
-    faltante = document.getElementById("faltante");
-
-formageneral["calcularapagar"].addEventListener("click", pago, false);
-formageneral["calcularfaltante"].addEventListener("click", faltapagar, false);
-
-function pago() {
-  try {
-      valida(isNaN(numinvitados.value) || numinvitados.value<=0,"Ingrese el número de invitados");
-      var pago = spnpaquete.value * numinvitados.valueAsNumber;
-      montoapagar.value = pago;
-  } catch (error) {
-      alert(error.message)  
-  }    
-}
-
-function faltapagar() {
-  try {
-      valida(isNaN(montoapagar.value) || montoapagar.value<=0,"Primero calcule el monto a pagar");
-      valida(isNaN(montopagado.value) || montopagado.value<=0,"Ingrese el monto pagado correctamente");
-      var falta = montoapagar.value - montopagado.valueAsNumber;
-      valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
-      valida(falta==0, "Pago saldado, ya puede eliminar el registro");
-      faltante.value = falta; 
-  } catch (error) {      
-      alert(error.message)  
-  }    
-}
-
-function valida(cond, mensaje){
-  if(cond){
-      throw new Error(mensaje);
-  }
-}
-
-*/
