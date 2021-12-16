@@ -41,7 +41,7 @@ async function guarda(evt) {
     const telefono = getString(formData, "telefono").trim();
     /**
      * @type {
-        import("./tipos.js").Evento} */
+        import("./tipos.js").Convenio} */
     const modelo = {
       nombre, 
       servicio,
