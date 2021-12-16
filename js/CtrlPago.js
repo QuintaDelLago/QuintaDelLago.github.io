@@ -70,11 +70,11 @@ async function guarda(evt) {
     const nombre = getString(formData, "nombredelciente").trim();  
     const correo = getString(formData, "correo").trim();  
     const tipo = getString(formData, "tipodeevento").trim();
-    const paquete = getString(formData, "paquete").trim();  
+    const precioppersona = getString(formData, "precioppersona").trim();  
     const invitados = getString(formData, "numerodeinvitados").trim();
     const mapagar = getString(formData, "montoapagar").trim();
     const mpagado = getString(formData, "montopagado").trim();
-    const faltante = getString(formData, "faltante").trim();
+    const falta = getString(formData, "faltante").trim();
     const fecha = getString(formData, "fecha").trim();
     /**
      * @type {
@@ -84,11 +84,11 @@ async function guarda(evt) {
       nombre,
       correo,
       tipo,
-      paquete,
+      precioppersona,
       invitados,
       mapagar,
       mpagado,
-      faltante, 
+      falta, 
       fecha,
     };
     await daoPagos.doc(id).set(modelo);
@@ -114,31 +114,29 @@ async function elimina() {
 
 async function pago() {
   try {
-    valida(isNaN(forma.numinvitados.value) || forma.numinvitados.value<=0,"Ingrese el número de invitados");
-    var pago = forma.paquete.value * forma.numinvitados.valueAsNumber;
-    forma.montoapagar.value = pago;
+    valida(isNaN(forma.numerodeinvitados.value) || forma.numerodeinvitados.value<=0,"Ingrese el número de invitados");
+    var pago = forma.precioppersona.value * forma.numerodeinvitados.valueAsNumber;
+    forma.mapagar.value = pago;
   } catch (error) {
     alert(error.message)  
   }    
   }
   
-  async function faltapagar() {
+async function faltapagar() {
   try {
-    valida(isNaN(forma.montoapagar.value) || forma.montoapagar.value<=0,"Primero calcule el monto a pagar");
-    valida(isNaN(forma.montopagado.value) || forma.montopagado.value<=0,"Ingrese el monto pagado correctamente");
-    var falta = forma.montoapagar.value - forma.montopagado.valueAsNumber;
+    valida(isNaN(forma.mapagar.value) || forma.mapagar.value<=0,"Primero calcule el monto a pagar");
+    valida(isNaN(forma.mpagado.value) || forma.mpagado.value<=0,"Ingrese el monto pagado correctamente");
+    var falta = forma.mapagar.value - forma.mpagado.valueAsNumber;
     valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
     valida(falta==0, "Pago saldado, ya puede eliminar el registro");
-    forma.faltante.value = falta; 
+    forma.falta.value = falta; 
   } catch (error) {      
     alert(error.message)  
   }    
   }
   
-  async function valida(cond, mensaje){
+async function valida(cond, mensaje){
   if(cond){
     throw new Error(mensaje);
   }
   }
-
-
