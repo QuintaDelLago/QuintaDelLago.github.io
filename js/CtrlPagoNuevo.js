@@ -68,7 +68,7 @@ async function guarda(evt) {
 function pago() {
   try {
     valida(isNaN(forma.numinvitados.value) || forma.numinvitados.value<=0,"Ingrese el número de invitados");
-    var pago = forma.spnpaquete.value * forma.numinvitados.valueAsNumber;
+    var pago = forma.paquete.value * forma.numinvitados.valueAsNumber;
     forma.montoapagar.value = pago;
   } catch (error) {
     alert(error.message)  

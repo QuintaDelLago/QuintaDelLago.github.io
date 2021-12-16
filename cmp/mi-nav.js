@@ -38,8 +38,14 @@ class MiNav extends HTMLElement {
           /* Enlaces para solo
            * para administrador. */
           if (roles.has("Administrador")) {
-            html += /* html */
+            html = /* html */
             `<li>
+             <a href="index.html">Galería</a>
+            </li>
+            <li>
+            <a href="contacto.html">Contacto</a>
+           </li>
+            <li>
                 <a href="convenios.html">Convenios</a>
               </li>
               <li>
@@ -65,8 +71,14 @@ class MiNav extends HTMLElement {
            * clientes.
            */
           if (roles.has("Cliente")) {
-            html += /* html */
+            html = /* html */
               `<li>
+              <a href="index.html">Galería</a>
+              </li>
+              <li>
+              <a href="contacto.html">Contacto</a>
+             </li>
+              <li>
                 <a href="pagoscliente.html">Pagos</a>
               </li>
               <li>
@@ -80,9 +92,6 @@ class MiNav extends HTMLElement {
           if (roles.has("Visitante")) {
             html += /* html */
               `<li>
-                 <a href="preguntasfrecuentesexternos.html">Preguntas</a>
-              </li>
-              <li>
                 <a href="paquetes.html">Paquetes</a>
               </li>`;
           }
