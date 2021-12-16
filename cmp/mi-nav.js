@@ -55,6 +55,11 @@ class MiNav extends HTMLElement {
               <li>
                 <a href="paquetes.html">Paquetes</a>
               </li>`;
+          } else {
+            html += /* html */
+              `<li>
+                <a href="preguntasfrecuentesexternos.html">Preguntas frecuentes</a>
+              </li>`;
           }
 
           if (roles.has("Cliente")) {
@@ -67,6 +72,11 @@ class MiNav extends HTMLElement {
               </li>
               <li>
                 <a href="paquetes.html">Paquetes</a>
+              </li>`;
+          } else {
+            html += /* html */
+              `<li>
+                <a href="preguntasfrecuentesexternos.html">Preguntas frecuentes</a>
               </li>`;
           }
 
