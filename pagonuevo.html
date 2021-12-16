@@ -40,22 +40,19 @@
     <p>
       <label>
         Nombre del cliente
-        <input name="nombredelcliente"
-          type="text" required>
+        <input name="nombre" type="text" required>
       </label>
     </p>
     <p>
       <label>
         Correo del cliente
-        <input name="correodelcliente"
-          type="text" required>
+        <input name="correo" type="text" required>
       </label>
     </p>
     <p>
       <label>
         Tipo de evento
-        <input name="tipodeevento"
-          type="text" required>
+        <input name="tipodeevento" type="text" required>
       </label>
     </p>
     <p>
@@ -68,7 +65,7 @@
     <p>
       <label>
         Paquete
-        <select id="paquete" name="precioppersona">
+        <select name="precioppersona">
           <option value="500">Golden</option>
           <option value="680">Silver</option>
           <option value="750">Premium</option>
@@ -79,20 +76,20 @@
       <p>
         <label>
           Monto a pagar
-          <input id="montoapagar" name="mapagar" disabled required>
+          <input name="mapagar" disabled required>
         </label>
       </p>
       <p>
         <label>
           Monto pagado
-          <input id="montopagado" name= "mpagado" type="number" required min="1">
+          <input name= "mpagado" type="number" required min="1">
           <input id="calcularfaltante" type="submit" class="boton" value="Calcular faltante" onclick="return false">
         </label>
       </p>
       <p>
         <label>
           Faltante
-          <input id="faltante" name="falta" disabled required>
+          <input name="faltante" disabled required>
         </label>
       </p>
       <p>

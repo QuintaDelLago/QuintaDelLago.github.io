@@ -32,41 +32,43 @@ async function protege(usuario) {
   }
 }
 
+
 /** @param {Event} evt */
 async function guarda(evt) {
   try {
     evt.preventDefault();
     const formData = new FormData(forma);
-    const nombre = getString(formData, "nombredelcliente").trim();  
+    const nombre = getString(formData, "nombre").trim();  
     const correo = getString(formData, "correo").trim();  
     const tipo = getString(formData, "tipodeevento").trim();
     const invitados = getString(formData, "numerodeinvitados").trim();
+    const precioppersona = getString(formData, "precioppersona").trim();  
+    const mapagar = getString(formData, "mapagar").trim();
+    const mpagado = getString(formData, "mpagado").trim();
+    const faltante = getString(formData, "faltante").trim();
     const fecha = getString(formData, "fecha").trim();
-    const precioppersona = getString(formData, "precioppersona");
-    const mapagar = getString(formData, "mapagar");
-    const mpagado = getString(formData, "mpagado");
-    const falta = getString(formData, "falta");
     /**
      * @type {
-        import("./tipos.js").Pago} */
+        import("./tipos.js").
+                Pago} */
     const modelo = {
-      nombre, 
+      nombre,
       correo,
       tipo,
       invitados,
-      fecha,
       precioppersona,
       mapagar,
       mpagado,
-      falta
+      faltante, 
+      fecha,
     };
-    await daoPagos.
-      add(modelo);
+    await daoPagos.doc(id).set(modelo);
     muestraPagos();
   } catch (e) {
     muestraError(e);
   }
 }
+
 async function pago() {
   try {
     valida(isNaN(forma.numerodeinvitados.value) || forma.numerodeinvitados.value<=0,"Ingrese el número de invitados");

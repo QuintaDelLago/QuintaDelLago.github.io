@@ -42,11 +42,11 @@ async function busca() {
       forma.nombre.value = data.nombre;
       forma.correo.value = data.correo  || "";
       forma.tipodeevento.value = data.tipo  || "";
-      forma.paquete.value = data.precioppersona   || "";
       forma.numerodeinvitados.value = data.invitados  || "";
-      forma.montoapagar.value = data.mapagar  || "";
-      forma.montopagado.value = data.mpagado  || "";
-      forma.faltante.value = data.falta  || "";
+      forma.precioppersona.value = data.precioppersona   || "";
+      forma.mapagar.value = data.mapagar  || "";
+      forma.mpagado.value = data.mpagado  || "";
+      forma.faltante.value = data.faltante  || "";
       forma.fecha.value = data.fecha  || "";
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
@@ -67,14 +67,14 @@ async function guarda(evt) {
   try {
     evt.preventDefault();
     const formData = new FormData(forma);
-    const nombre = getString(formData, "nombredelciente").trim();  
+    const nombre = getString(formData, "nombre").trim();  
     const correo = getString(formData, "correo").trim();  
     const tipo = getString(formData, "tipodeevento").trim();
-    const precioppersona = getString(formData, "precioppersona").trim();  
     const invitados = getString(formData, "numerodeinvitados").trim();
-    const mapagar = getString(formData, "montoapagar").trim();
-    const mpagado = getString(formData, "montopagado").trim();
-    const falta = getString(formData, "faltante").trim();
+    const precioppersona = getString(formData, "precioppersona").trim();  
+    const mapagar = getString(formData, "mapagar").trim();
+    const mpagado = getString(formData, "mpagado").trim();
+    const faltante = getString(formData, "faltante").trim();
     const fecha = getString(formData, "fecha").trim();
     /**
      * @type {
@@ -84,11 +84,11 @@ async function guarda(evt) {
       nombre,
       correo,
       tipo,
-      precioppersona,
       invitados,
+      precioppersona,
       mapagar,
       mpagado,
-      falta, 
+      faltante, 
       fecha,
     };
     await daoPagos.doc(id).set(modelo);
