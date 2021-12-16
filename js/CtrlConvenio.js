@@ -70,7 +70,7 @@ async function guarda(evt) {
     /**
      * @type {
         import("./tipos.js").
-                Evento} */
+                Convenio} */
     const modelo = {
       nombre, 
       servicio,
