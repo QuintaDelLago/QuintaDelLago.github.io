@@ -11,7 +11,20 @@ import {
 
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
+/** @type {HTMLImageElement} */
+const avatar = document.
+  querySelector("#avatar");
 
+/* Escucha cambios de usuario.
+ * El primer parámetro es una
+ * función que se invoca cada que
+ * hay un cambio de usuario y
+ * recibe los datos del usuario.
+ * El segundo parámetro es una
+ * función que se invoca cuando se
+ * presenta un error en un cambio
+ * de usuario y recibe un Error.
+ */
 getAuth().onAuthStateChanged(
   muestraSesión, muestraError);
 
@@ -28,8 +41,17 @@ async function
   muestraSesión(usuario) {
   if (usuario && usuario.email) {
     // Usuario aceptado.
-    forma.termina.addEventListener("click", terminaSesión);
+    forma.email.value =
+      usuario.email || "";
+    forma.nombre.value =
+      usuario.displayName || "";
+    avatar.src =
+      usuario.photoURL || "";
+    forma.terminarSesión.
+      addEventListener(
+        "click", terminaSesión);
   } else {
+    // No ha iniciado sesión.
     iniciaSesión();
   }
 }
