@@ -78,8 +78,9 @@ function htmlFila(doc) {
       <a class="fila" href=
   "pago.html?${parámetros}">
         <strong class="primario">
-          ${nombre} ${faltante} ${dformat}
+          ${nombre} $${faltante} 
         </strong>
+        <a class = "secundario"> ${dformat} </a>
       </a>
      
     </li>`);
