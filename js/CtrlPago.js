@@ -124,8 +124,8 @@ async function pago() {
   
 async function faltapagar() {
   try {
-    valida(isNaN(forma.mapagar.value) || forma.mapagar.value<=0,"Primero calcule el monto a pagar");
-    valida(isNaN(forma.mpagado.value) || forma.mpagado.value<=0,"Ingrese el monto pagado correctamente");
+    valida(isNaN(forma.mapagar.value) || forma.mapagar.valueAsNumber<=0,"Primero calcule el monto a pagar");
+    valida(isNaN(forma.mpagado.value) || forma.mpagado.valueAsNumber<=0,"Ingrese el monto pagado correctamente");
     var falta = forma.mapagar.value - forma.mpagado.valueAsNumber;
     valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
     valida(falta==0, "Pago saldado, ya puede eliminar el registro");

@@ -73,7 +73,7 @@ async function pago() {
   try {
     valida(isNaN(forma.numerodeinvitados.value) || forma.numerodeinvitados.value<=0,"Ingrese el número de invitados");
     var pago = forma.precioppersona.value * forma.numerodeinvitados.value;
-    forma.mapagar.value = pago;
+    forma.mapagar.valueAsNumber = pago;
   } catch (error) {
     alert(error.message)  
   }    
@@ -81,12 +81,12 @@ async function pago() {
   
 async function faltapagar() {
   try {
-    valida(isNaN(forma.mapagar.value) || forma.mapagar.value<=0,"Primero calcule el monto a pagar");
-    valida(isNaN(forma.mpagado.value) || forma.mpagado.value<=0,"Ingrese el monto pagado correctamente");
+    valida(isNaN(forma.mapagar.valueAsNumber) || forma.mapagar.valueAsNumber<=0,"Primero calcule el monto a pagar");
+    valida(isNaN(forma.mpagado.valueAsNumber) || forma.mpagado.valueAsNumber<=0,"Ingrese el monto pagado correctamente");
     var falta = forma.mapagar.value - forma.mpagado.value;
     valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
     valida(falta==0, "Pago saldado, ya puede eliminar el registro");
-    forma.falta.value = falta; 
+    forma.falta.valueAsNumber = falta; 
   } catch (error) {      
     alert(error.message)  
   }    
