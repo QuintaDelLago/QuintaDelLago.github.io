@@ -17,9 +17,6 @@ class MiNav extends HTMLElement {
           <a href="index.html">Galería</a>
         </li>
         <li>
-          <a href="preguntasfrecuentesexternos.html">Preguntas</a>
-        </li>
-        <li>
           <a href="contacto.html">Contacto</a>
         </li>
       </ul>`;
@@ -36,15 +33,8 @@ class MiNav extends HTMLElement {
           let html = "";
           const roles = await cargaRoles(usu.email);
           if (roles.has("Administrador")) {
-            html = "";
-            html = /* html */
+            html += /* html */
             `<li>
-             <a href="index.html">Galería</a>
-            </li>
-            <li>
-            <a href="contacto.html">Contacto</a>
-           </li>
-            <li>
                 <a href="convenios.html">Convenios</a>
               </li>
               <li>
@@ -68,15 +58,8 @@ class MiNav extends HTMLElement {
           }
 
           if (roles.has("Cliente")) {
-            html = "";
-            html = /* html */
+            html += /* html */
               `<li>
-              <a href="index.html">Galería</a>
-              </li>
-              <li>
-              <a href="contacto.html">Contacto</a>
-             </li>
-              <li>
                 <a href="pagoscliente.html">Pagos</a>
               </li>
               <li>
@@ -91,6 +74,14 @@ class MiNav extends HTMLElement {
             html += /* html */
               `<li>
                 <a href="paquetes.html">Paquetes</a>
+              </li>
+              <li>
+                <a href="preguntasfrecuentesexternos.html">Preguntas frecuentes</a>
+              </li>`;
+          } else {
+            html += /* html */
+              `<li>
+                <a href="preguntasfrecuentesexternos.html">Preguntas frecuentes</a>
               </li>`;
           }
           this.ul.innerHTML += html;
