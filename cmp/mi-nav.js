@@ -58,7 +58,7 @@ class MiNav extends HTMLElement {
                 <a href="trabajadores.html">Trabajadores</a>
               </li>
               <li>
-                <a href="preguntasfrecuentes.html">Gestionar preguntas</a>
+                <a href="preguntasfrecuentes.html">Preguntas</a>
               </li>
               <li>
                 <a href="pagos.html">Pagos</a>
