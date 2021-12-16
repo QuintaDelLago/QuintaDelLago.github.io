@@ -15,7 +15,7 @@ const lista = document.
   querySelector("#lista");
 const daoAlumno =
   getFirestore().
-    collection("Eventos");
+    collection("Convenios");
 
 getAuth().
   onAuthStateChanged(
@@ -66,10 +66,10 @@ function htmlFila(doc) {
    * @type {import("./tipos.js").
                   Convenio} */
   const data = doc.data();
-  const nombre = cod(data.nombreempresa);
+  const nombre = cod(data.nombre);
   const servicio = cod(data.servicio);
-  const telefono= cod(data.telefono);
-  const encargado= cod(data.encargado);
+  const encargado = cod(data.encargado);
+  const telefono = cod(data.telefono);
   const parámetros =
     new URLSearchParams();
   parámetros.append("id", doc.id);
@@ -78,10 +78,16 @@ function htmlFila(doc) {
       <a class="fila" href=
   "convenio.html?${parámetros}">
         <strong class="primario">
-          ${nombre} ${servicio} ${encargado} ${telefono}
+          ${nombre}
         </strong>
-      </a>
-     
+        <a class="secundario">
+         ${servicio}
+        </a>
+        <strong class="secundario">
+          ${telefono}
+        </strong>
+        <a> ${encargado} </a>
+      </a>     
     </li>`);
 }
 
@@ -90,3 +96,4 @@ function errConsulta(e) {
   muestraError(e);
   consulta();
 }
+

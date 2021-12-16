@@ -44,8 +44,8 @@ async function busca() {
       const data = doc.data();
       forma.nombreempresa.value = data.nombre;
       forma.servicio.value = data.servicio  || "";
-      forma.encargado.value = data.encargado || "";
       forma.telefono.value = data.telefono || "";
+      forma.encargado.value = data.encargado || "";
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
     } else {
@@ -70,7 +70,7 @@ async function guarda(evt) {
     /**
      * @type {
         import("./tipos.js").
-                Convenio} */
+                Evento} */
     const modelo = {
       nombre, 
       servicio,

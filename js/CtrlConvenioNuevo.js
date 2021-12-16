@@ -7,7 +7,7 @@ import {
   muestraError
 } from "../lib/util.js";
 import {
-  muestraEventos
+  muestraConvenios
 } from "./navegacion.js";
 import {
   tieneRol
@@ -41,7 +41,7 @@ async function guarda(evt) {
     const telefono = getString(formData, "telefono").trim();
     /**
      * @type {
-        import("./tipos.js").Convenio} */
+        import("./tipos.js").Evento} */
     const modelo = {
       nombre, 
       servicio,
@@ -50,9 +50,10 @@ async function guarda(evt) {
     };
     await daoConvenios.
       add(modelo);
-    muestraEventos();
+    muestraConvenios();
   } catch (e) {
     muestraError(e);
   }
 }
+
 
