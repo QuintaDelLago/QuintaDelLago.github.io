@@ -39,7 +39,7 @@ async function busca() {
           import("./tipos.js").
                   Pago} */
       const data = doc.data();
-      forma.nombredelcliente.value = data.nombre;
+      forma.nombre.value = data.nombre;
       forma.correo.value = data.correo  || "";
       forma.tipodeevento.value = data.tipo  || "";
       forma.paquete.value = data.precioppersona   || "";
@@ -51,7 +51,7 @@ async function busca() {
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
       forma.calcularapagar.addEventListener("click", pago);
-    forma.calcularfaltante.addEventListener("click", faltapagar);
+      forma.calcularfaltante.addEventListener("click", faltapagar);
     } else {
       throw new Error(
         "No se encontró.");
