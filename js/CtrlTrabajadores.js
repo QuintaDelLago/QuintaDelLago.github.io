@@ -69,7 +69,7 @@ function htmlFila(doc) {
   const nombre = cod(data.nombre);
   const puesto = cod(data.puesto);
   const telefono = cod(data.telefono);
-  const avatar = cod(data.avatar);
+  //const avatar = cod(data.avatar);
   const parámetros =
     new URLSearchParams();
   parámetros.append("id", doc.id);
@@ -86,7 +86,6 @@ function htmlFila(doc) {
         <strong class="secundario">
           ${telefono}
         </strong>
-        <a> ${avatar} </a>
       </a>     
     </li>`);
 }

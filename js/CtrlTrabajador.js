@@ -45,7 +45,7 @@ async function busca() {
       forma.nombredeltrabajador.value = data.nombre;
       forma.puesto.value = data.puesto  || "";
       forma.telefono.value = data.telefono || "";
-      forma.avatar.value = data.avatar || "";
+     // forma.avatar.value = data.avatar || "";
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
     } else {
@@ -66,7 +66,7 @@ async function guarda(evt) {
     const nombre = getString(formData, "nombredeltrabajador").trim();  
     const puesto = getString(formData, "puesto").trim();
     const telefono = getString(formData, "telefono").trim();
-    const avatar = getString(formData, "avatar").trim();
+  //  const avatar = getString(formData, "avatar").trim();
     /**
      * @type {
         import("./tipos.js").
@@ -74,8 +74,8 @@ async function guarda(evt) {
     const modelo = {
       nombre, 
       puesto,
-      telefono,
-      avatar
+      telefono
+     // avatar
     };
     await daoTrabajadores.doc(id).set(modelo);
     muestraTrabajadores();
