@@ -51,7 +51,7 @@ async function guarda(evt) {
       telefono
     };
     await daoTrabajadores.add(modelo);
-    await subeStorage(telefono, avatar);
+    await subeStorage(id, avatar);
     muestraTrabajadores();
   } catch (e) {
     muestraError(e);

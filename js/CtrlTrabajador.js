@@ -49,7 +49,7 @@ async function busca() {
       forma.nombredeltrabajador.value = data.nombre;
       forma.puesto.value = data.puesto  || "";
       forma.telefono.value = data.telefono || "";
-      img.src = await urlStorage(data.telefono);
+      img.src = await urlStorage(id);
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
     } else {
@@ -81,7 +81,7 @@ async function guarda(evt) {
       telefono
     };
     await daoTrabajadores.doc(id).set(modelo);
-    await subeStorage(telefono, avatar);
+    await subeStorage(id, avatar);
     muestraTrabajadores();
   } catch (e) {
     muestraError(e);
@@ -93,9 +93,7 @@ async function elimina() {
     if (confirm("Confirmar la " +
       "eliminación")) {
       await daoTrabajadores.doc(id).delete();
-      const formData = new FormData(forma);
-      const telefono = formData.get("telefono");
-      await eliminaStorage(telefono);
+      await eliminaStorage(id);
       muestraTrabajadores();
     }
   } catch (e) {
