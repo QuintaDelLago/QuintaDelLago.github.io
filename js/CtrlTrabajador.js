@@ -91,7 +91,7 @@ async function guarda(evt) {
 async function elimina() {
   try {
     if (confirm("Confirmar la eliminación")) {
-      daoTrabajadores.doc(id).delete();
+      await daoTrabajadores.doc(id).delete();
       const formData = new FormData(forma);
       const telefono = getString(formData, "telefono").trim();  
       await eliminaStorage(telefono);
