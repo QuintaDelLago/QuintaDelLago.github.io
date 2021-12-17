@@ -25,21 +25,22 @@
   </script>
   <link rel="stylesheet"
     href="css/estilos.css">
-</head>
-<body>
-  <form id="forma">
-    <mi-nav></mi-nav>
-    <header>
-      <h1>Edición de pago</h1>
-      <div class="herramientas">
-        <a href="pagos.html">
-          Cancelar</a>
-        <button id="guardar">Guardar</button>
-        <button id="eliminar">
-          Eliminar
-        </button>
-      </div>
-    </header>
+  </head>
+  <body>
+    <form name="forma">
+      <mi-nav></mi-nav>
+      <header>
+        <h1>Edición de pagos</h1>
+        <div class="herramientas">
+          <a href="pagos.html">
+            Cancelar</a>
+          <button>Guardar</button>
+          <button name="eliminar"
+            type="button">
+            Eliminar
+          </button>
+        </div>
+      </header>
     <p>
       <label>
         Nombre del cliente
@@ -79,7 +80,7 @@
       <p>
         <label>
           Monto a pagar
-          <input name="mapagar" type="number">
+          <input name="mapagar" type="number" required>
         </label>
       </p>
       <p>
@@ -104,7 +105,8 @@
     <mi-footer></mi-footer>
   </form>
   <script type="module"
-    src="js/CtrlPagoNuevo.js">
+    src="js/CtrlPago.js">
     </script>
 </body>
 </html>
+

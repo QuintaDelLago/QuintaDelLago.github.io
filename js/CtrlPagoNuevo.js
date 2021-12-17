@@ -58,7 +58,7 @@ async function guarda(evt) {
       mapagar,
       mpagado,
       faltante, 
-      fecha,
+      fecha
     };
     await daoPagos.add(modelo);
     muestraPagos();
