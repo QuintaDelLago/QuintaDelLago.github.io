@@ -73,7 +73,7 @@ async function pago() {
   try {
     valida(isNaN(forma.numerodeinvitados.value) || forma.numerodeinvitados.value<=0,"Ingrese el número de invitados");
     var pago = forma.precioppersona.value * forma.numerodeinvitados.value;
-    forma.mapagar = pago;
+    forma.mapagar.value = pago;
   } catch (error) {
     alert(error.message)  
   }    
