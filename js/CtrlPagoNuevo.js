@@ -43,10 +43,10 @@ async function guarda(evt) {
     const tipo = getString(formData, "tipodeevento").trim();
     const invitados = getString(formData, "numerodeinvitados").trim();
     const precioppersona = getString(formData, "precioppersona").trim();  
-    const mapagar = getString(formData, "mapagar").trim();
-    const mpagado = getString(formData, "mpagado").trim();
-    const faltante = getString(formData, "faltante").trim();
-    const fecha = getString(formData, "fecha").trim();
+    const mapagar = getString(formData,"mapagar").trim();
+    const mpagado = getString(formData,"mpagado").trim();
+    const faltante = getString(formData,"faltante").trim();
+    const fecha = getString(formData,"fecha").trim();
     /**
      * @type {
         import("./tipos.js").
@@ -86,7 +86,7 @@ async function faltapagar() {
     var falta = forma.mapagar.value - forma.mpagado.value;
     valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
     valida(falta==0, "Pago saldado, ya puede eliminar el registro");
-    forma.falta.value = falta; 
+    forma.faltante.value = falta; 
   } catch (error) {      
     alert(error.message)  
   }    
