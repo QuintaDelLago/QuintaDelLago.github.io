@@ -40,7 +40,7 @@ async function guarda(evt) {
     const nombre = getString(formData, "nombredeltrabajador").trim();  
     const puesto = getString(formData, "puesto").trim();
     const telefono = getString(formData, "telefono").trim();
-    await guardaTrabajador(evt,formData,id);
+    await guardaTrabajador(evt,formData,telefono);
     /**
      * @type {
         import("./tipos.js").Trabajador} */

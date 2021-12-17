@@ -69,7 +69,8 @@ async function guarda(evt) {
 
 async function pago() {
   try {
-    valida((isNaN(forma.numerodeinvitados.valueAsNumber) || forma.numerodeinvitados.valueAsNumber<=0),"Ingrese el número de invitados");
+    if(isNaN(forma.numerodeinvitados.valueAsNumber) || forma.numerodeinvitados.valueAsNumber<=0)
+        throw new Error("Ingrese el número de invitados");
     var pago = forma.precioppersona.value * forma.numerodeinvitados.value;
     forma.mapagar.value = pago;
   } catch (error) {
@@ -79,19 +80,18 @@ async function pago() {
   
 async function faltapagar() {
   try {
-    valida((isNaN(forma.mapagar.valueAsNumber) || forma.mapagar.valueAsNumber<=0),"Primero calcule el monto a pagar");
-    valida((isNaN(forma.mpagado.valueAsNumber) || forma.mpagado.valueAsNumber<=0),"Ingrese el monto pagado correctamente");
+    if(isNaN(forma.mapagar.valueAsNumber) || forma.mapagar.valueAsNumber<=0)
+        throw new Error("Primero calcule el monto a pagar");
+    if(isNaN(forma.mpagado.valueAsNumber) || forma.mpagado.valueAsNumber<=0)
+        throw new Error("Ingrese el monto pagado correctamente");
     var falta = forma.mapagar.value - forma.mpagado.value;
-    valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
-    valida(falta==0, "Pago saldado, ya puede eliminar el registro");
+    if(falta<0)
+        throw new Error("El pago es mayor al monto acordado, cheque registro");
+    if (falta==0)
+        throw new Error ("Pago saldado, ya puede eliminar el registro");
     forma.faltante.value = falta; 
   } catch (error) {      
     alert(error.message)  
   }    
 }
-  
-async function valida(cond, mensaje){
-  if(cond){
-    throw new Error(mensaje);
-  }
-}
+
