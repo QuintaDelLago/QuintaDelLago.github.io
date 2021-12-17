@@ -13,9 +13,7 @@ import {
   tieneRol
 } from "./seguridad.js";
 
-const daoPagos =
-  getFirestore().
-    collection("Pagos");
+const daoPagos = getFirestore().collection("Pagos");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 getAuth().onAuthStateChanged(protege, muestraError);
@@ -62,7 +60,7 @@ async function guarda(evt) {
       faltante, 
       fecha,
     };
-    await daoPagos.doc(id).set(modelo);
+    await daoPagos.add(modelo);
     muestraPagos();
   } catch (e) {
     muestraError(e);
