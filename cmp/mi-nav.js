@@ -84,9 +84,9 @@ class MiNav extends HTMLElement {
             `<li>
               <a href="preguntasfrecuentesexternos.html">Preguntas frecuentes</a>
             </li>`;
-        }
-        this.ul.innerHTML += html;
+            this.ul.innerHTML += html;
+        }        
       }
-      }
+    }
 customElements.define("mi-nav", MiNav);
 
