@@ -102,9 +102,7 @@ async function elimina() {
   try {
     if (confirm("Confirmar la " +
       "eliminación")) {
-      await daoPagos.
-        doc(id).
-        delete();
+      await daoPagos.doc(id).delete();
       muestraPagos();
     }
   } catch (e) {
@@ -129,7 +127,7 @@ async function faltapagar() {
     var falta = forma.mapagar.value - forma.mpagado.valueAsNumber;
     valida(falta<0, "El pago es mayor al monto acordado, cheque registro");
     valida(falta==0, "Pago saldado, ya puede eliminar el registro");
-    forma.falta.value = falta; 
+    forma.faltante.value = falta; 
   } catch (error) {      
     alert(error.message)  
   }    
