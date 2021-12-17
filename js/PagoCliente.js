@@ -24,7 +24,6 @@ getAuth().onAuthStateChanged(contrato, muestraError);
 *    sesión. */
 async function contrato(usuario) {
 if (usuario && usuario.email) {
-  forma.correo.value = usuario.email || "";
   const id = usuario.email;
   busca(id);
 } else {
