@@ -94,8 +94,8 @@ async function elimina() {
       "eliminación")) {
       await daoTrabajadores.doc(id).delete();
       const formData = new FormData(forma);
-      const avatar = formData.get("avatar");
-      await eliminaStorage(avatar);
+      const telefono = formData.get("telefono");
+      await eliminaStorage(telefono);
       muestraTrabajadores();
     }
   } catch (e) {
