@@ -91,10 +91,7 @@ async function guarda(evt) {
 async function elimina() {
   try {
     if (confirm("Confirmar la eliminación")) {
-      const daoTrabajadores = getFirestore().collection("Trabajadores");
-      const params = new URL(location.href).searchParams;
-      const id = params.get("id");
-      await daoTrabajadores.doc(id).delete();
+      daoTrabajadores.doc(id).delete();
       const formData = new FormData(forma);
       const telefono = getString(formData, "telefono").trim();  
       await eliminaStorage(telefono);
