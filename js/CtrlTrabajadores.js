@@ -9,11 +9,14 @@ import {
 import {
   tieneRol
 } from "./seguridad.js";
+import {
+  urlStorage
+} from "../lib/storage.js";
 
 /** @type {HTMLUListElement} */
 const lista = document.
   querySelector("#lista");
-const daoAlumno =
+const daoTrabajadores =
   getFirestore().
     collection("Trabajadores");
 
@@ -32,30 +35,36 @@ async function protege(usuario) {
 }
 
 function consulta() {
-  daoAlumno.
-    orderBy("nombre")
-    .onSnapshot(
-      htmlLista, errConsulta);
+  daoTrabajadores.orderBy("nombre").onSnapshot(htmlLista, errConsulta);
 }
 
 /**
  * @param {import(
     "../lib/tiposFire.js").
     QuerySnapshot} snap */
-function htmlLista(snap) {
-  let html = "";
-  if (snap.size > 0) {
-    snap.forEach(doc =>
-      html += htmlFila(doc));
-  } else {
-    html += /* html */
-      `<li class="vacio">
-        -- No hay trabajadores
-        registrados. --
-      </li>`;
-  }
-  lista.innerHTML = html;
-}
+    async function htmlLista(snap) {
+      let html = "";
+      if (snap.size > 0) {
+        /** @type {
+              Promise<string>[]} */
+        let trabajadores = [];
+        snap.forEach(doc => trabajadores.
+          push(htmlFila(doc)));
+        const htmlFilas =
+          await Promise.all(trabajadores);
+        /* Junta el todos los
+         * elementos del arreglo en
+         * una cadena. */
+        html += htmlFilas.join("");
+      } else {
+        html += /* html */
+          `<li class="vacio">
+            -- No hay trabajadores
+            registrados. --
+          </li>`;
+      }
+      lista.innerHTML = html;
+    }
 
 /**
  * @param {import(
@@ -69,24 +78,27 @@ function htmlFila(doc) {
   const nombre = cod(data.nombre);
   const puesto = cod(data.puesto);
   const telefono = cod(data.telefono);
-  //const avatar = cod(data.avatar);
+  const img = cod(await urlStorage(doc.id));
   const parámetros =
     new URLSearchParams();
   parámetros.append("id", doc.id);
   return ( /* html */
     `<li>
-      <a class="fila" href=
-  "trabajador.html?${parámetros}">
-        <strong class="primario">
-          ${nombre}
-        </strong>
-        <a class="secundario">
-         ${puesto}
-        </a>
-        <strong class="secundario">
-          ${telefono}
-        </strong>
-      </a>     
+      <a class="fila conImagen"
+          href=
+    "trabajador.html?${parámetros}">
+        <span class="marco">
+          <img src="${img}">
+        </span>
+        <span class="texto">
+          <strong class="primario">
+            ${nombre}
+          <span class="secundario">
+            ${puesto}<br>
+            ${telefono}
+          </span>
+        </span>
+      </a>
     </li>`);
 }
 

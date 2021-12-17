@@ -17,9 +17,7 @@ import {
 } from "./trabajadores.js";
 
 
-const daoTrabajadores =
-  getFirestore().
-    collection("Trabajadores");
+const daoTrabajadores = getFirestore().collection("Trabajadores");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 getAuth().onAuthStateChanged(protege, muestraError);
@@ -42,7 +40,7 @@ async function guarda(evt) {
     const nombre = getString(formData, "nombredeltrabajador").trim();  
     const puesto = getString(formData, "puesto").trim();
     const telefono = getString(formData, "telefono").trim();
-    await guardaTrabajador(evt,formData, id);
+    await guardaTrabajador(evt,formData,id);
     /**
      * @type {
         import("./tipos.js").Trabajador} */
@@ -51,8 +49,7 @@ async function guarda(evt) {
       puesto,
       telefono
     };
-    await daoTrabajadores.
-      add(modelo);
+    await daoTrabajadores.add(modelo);
     muestraTrabajadores();
   } catch (e) {
     muestraError(e);
