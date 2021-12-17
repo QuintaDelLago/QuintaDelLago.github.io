@@ -114,8 +114,8 @@ async function elimina() {
 
 async function pago() {
   try {
-    valida(isNaN(forma.numerodeinvitados.value) || forma.numerodeinvitados.value<=0,"Ingrese el número de invitados");
-    var pago = forma.precioppersona.value * forma.numerodeinvitados.valueAsNumber;
+    valida(isNaN(forma.numerodeinvitados.valueAsNumber) || forma.numerodeinvitados.valueAsNumber<=0,"Ingrese el número de invitados");
+    var pago = forma.precioppersona.value * forma.numerodeinvitados.value;
     forma.mapagar.value = pago;
   } catch (error) {
     alert(error.message)  
