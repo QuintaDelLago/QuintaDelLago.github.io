@@ -13,8 +13,8 @@ import {
   tieneRol
 } from "./seguridad.js";
 import {
-  guardaTrabajador,
-} from "./trabajadores.js";
+  subeStorage
+} from "../lib/storage.js";
 
 
 const daoTrabajadores = getFirestore().collection("Trabajadores");
@@ -40,16 +40,18 @@ async function guarda(evt) {
     const nombre = getString(formData, "nombredeltrabajador").trim();  
     const puesto = getString(formData, "puesto").trim();
     const telefono = getString(formData, "telefono").trim();
-    await guardaTrabajador(evt,formData,telefono);
+    const avatar = formData.get("avatar");
     /**
      * @type {
-        import("./tipos.js").Trabajador} */
+        import("./tipos.js").
+                Trabajador} */
     const modelo = {
       nombre, 
       puesto,
       telefono
     };
     await daoTrabajadores.add(modelo);
+    await subeStorage(id, avatar);
     muestraTrabajadores();
   } catch (e) {
     muestraError(e);
