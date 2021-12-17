@@ -85,10 +85,10 @@ async function htmlFila(doc) {
         <span class="texto">
           <strong class="primario">
             ${nombre}
-          <a class="secundario">
+          <span class="secundario">
             ${puesto}<br>
             ${telefono}
-          </a>
+          </span>
         </span>
       </a>
     </li>`);
