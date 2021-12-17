@@ -5,7 +5,7 @@
   <meta name="viewport"
     content="width=device-width,
        initial-scale=1.0">
-  <title>Pagos - Cliente</title>
+  <title>Pago nuevo</title>
   <script
     src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js">
     </script>
@@ -25,61 +25,67 @@
   </script>
   <link rel="stylesheet"
     href="css/estilos.css">
-
 </head>
 <body>
-  <form name="forma">
+  <form id="forma">
     <mi-nav></mi-nav>
     <header>
-      <h1>Pagos - Cliente</h1>
-      </div>
+      <h1>Pago - Cliente</h1>
     </header>
     <p>
       <label>
-        Tipo de evento
-        <input name="tipodeevento"
-          type="text" disabled>
+        Nombre del cliente
+        <input name="nombre" type="text" disabled>
       </label>
     </p>
     <p>
       <label>
-        Paquete
-        <select name="Paquete" disabled>
-          <option value="1">Golden</option>
-          <option value="2">Silver</option>
-          <option value="3">Premium</option>
-        </select>
+        Correo del cliente
+        <input name="correo" type="email" disabled>
+      </label>
+    </p>
+    <p>
+      <label>
+        Tipo de evento
+        <input name="tipodeevento" type="text" disabled>
       </label>
     </p>
     <p>
       <label>
         Número de invitados
-        <input name="numerodeinvitados"
-          type="text" disabled>
+        <input name="numerodeinvitados" type="text" disabled>
       </label>
     </p>
     <p>
       <label>
-        Monto a pagar
-        <input name="montoapagar"
-          type="number" disabled>
+        Paquete
+        <select name="precioppersona" disabled>
+          <option value="500">Golden</option>
+          <option value="680">Silver</option>
+          <option value="750">Premium</option>
+        </select>
       </label>
     </p>
     <p>
-      <label>
-        Monto pagado
-        <input name="montopagado"
-          type="number" disabled>
-      </label>
-    </p>
-    <p>
-      <label>
-        Faltante
-        <input name="faltante"
-          type="number" disabled>
-      </label>
-    </p>
-    <p>
+      <p>
+        <label>
+          Monto a pagar
+          <input name="mapagar" disabled>
+        </label>
+      </p>
+      <p>
+        <label>
+          Monto pagado
+          <input name= "mpagado" type="number" disabled>
+        </label>
+      </p>
+      <p>
+        <label>
+          Faltante
+          <input name="faltante" disabled>
+        </label>
+      </p>
+      <p>
       <label>
         Fecha del evento
         <input name="fecha" type="date" disabled>
@@ -88,8 +94,7 @@
     <mi-footer></mi-footer>
   </form>
   <script type="module"
-    src="js/CtrlAlumno.js">
+    src="js/PagoCliente.js">
     </script>
 </body>
 </html>
-
