@@ -11,41 +11,18 @@ import {
 
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-/** @type {HTMLImageElement} */
-const avatar = document.
-  querySelector("#avatar");
+getAuth().onAuthStateChanged(listener, muestraError);
 
-/* Escucha cambios de usuario.
- * El primer parámetro es una
- * función que se invoca cada que
- * hay un cambio de usuario y
- * recibe los datos del usuario.
- * El segundo parámetro es una
- * función que se invoca cuando se
- * presenta un error en un cambio
- * de usuario y recibe un Error.
- */
-getAuth().onAuthStateChanged(
-  muestraSesión, muestraError);
-
-/** Muestra los datos del usuario
- * o manda a iniciar sesión en
- * caso de que no haya empezado.
+/**
  * @param {import(
     "../lib/tiposFire").
-    User} usuario modelo con las
- *    características del usuario
- *    o null si no ha iniciado
- *    sesión. */
+    User} usuario*/
 async function
-  muestraSesión(usuario) {
+  listener(usuario) {
   if (usuario && usuario.email) {
-    // Usuario aceptado.
     forma.terminarSesión.
-      addEventListener(
-        "click", terminaSesión);
+      addEventListener("click", terminaSesión);
   } else {
-    // No ha iniciado sesión.
     iniciaSesión();
   }
 }

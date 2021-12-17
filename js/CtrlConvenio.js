@@ -31,8 +31,6 @@ async function protege(usuario) {
   }
 }
 
-/** Busca y muestra los datos que
- * corresponden al id recibido. */
 async function busca() {
   try {
     const doc = await daoConvenios.doc(id).get();
