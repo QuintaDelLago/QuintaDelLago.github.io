@@ -14,6 +14,7 @@ import {
 } from "./seguridad.js";
 import {
   eliminaStorage,
+  subeStorage,
   urlStorage
 } from "../lib/storage.js";
 
