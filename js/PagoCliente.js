@@ -11,27 +11,13 @@ import {
 } from "./navegacion.js";
 
 const daoPagos = getFirestore().collection("Pagos");
+const params = new URL(location.href).searchParams;
+const id = params.get("correo");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
-getAuth().onAuthStateChanged(contrato, muestraError);
+getAuth().onAuthStateChanged(busca, muestraError);
 
-
-/** @param {import(
-  "../lib/tiposFire").
-  User} usuario modelo con las
-*    características del usuario
-*    o null si no ha iniciado
-*    sesión. */
-async function contrato(usuario) {
-if (usuario && usuario.email) {
-  const id = usuario.email;
-  busca(id);
-} else {
-  alert("Usted no tiene contrato registrado, comuniquese con el administrador inmediatamente");
-}
-}
-
-async function busca(id) {
+async function busca() {
   try {
     const doc = await daoPagos.doc(id).get();
     if (doc.exists) {
