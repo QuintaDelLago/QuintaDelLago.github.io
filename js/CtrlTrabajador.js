@@ -37,8 +37,6 @@ async function protege(usuario) {
   }
 }
 
-/** Busca y muestra los datos que
- * corresponden al id recibido. */
 async function busca() {
   try {
     const doc = await daoTrabajadores.doc(id).get();
@@ -95,7 +93,7 @@ async function elimina() {
     if (confirm("Confirmar la " +
       "eliminación")) {
       await daoTrabajadores.doc(id).delete();
-  //    await eliminaStorage(id);
+      await eliminaStorage(id);
       muestraTrabajadores();
     }
   } catch (e) {
