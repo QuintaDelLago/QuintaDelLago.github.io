@@ -70,7 +70,7 @@ function consulta() {
  * @param {import(
     "../lib/tiposFire.js").
     DocumentSnapshot} doc */
-function htmlFila(doc) {
+async function htmlFila(doc) {
   /**
    * @type {import("./tipos.js").
                   Trabajador} */
