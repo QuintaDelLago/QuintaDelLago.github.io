@@ -12,12 +12,17 @@ import {
 import {
   tieneRol
 } from "./seguridad.js";
+import {
+  eliminaStorage,
+  urlStorage
+} from "../lib/storage.js";
 
 const daoTrabajadores = getFirestore().collection("Trabajadores");
 const params = new URL(location.href).searchParams;
 const id = params.get("id");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
+const img = document.querySelector("img");
 
 getAuth().onAuthStateChanged(protege, muestraError);
 
@@ -45,7 +50,7 @@ async function busca() {
       forma.nombredeltrabajador.value = data.nombre;
       forma.puesto.value = data.puesto  || "";
       forma.telefono.value = data.telefono || "";
-     // forma.avatar.value = data.avatar || "";
+      img.src = await urlStorage(id);
       forma.addEventListener("submit", guarda);
       forma.eliminar.addEventListener("click", elimina);
     } else {
@@ -66,7 +71,7 @@ async function guarda(evt) {
     const nombre = getString(formData, "nombredeltrabajador").trim();  
     const puesto = getString(formData, "puesto").trim();
     const telefono = getString(formData, "telefono").trim();
-  //  const avatar = getString(formData, "avatar").trim();
+    const avatar = formData.get("avatar");
     /**
      * @type {
         import("./tipos.js").
@@ -75,9 +80,9 @@ async function guarda(evt) {
       nombre, 
       puesto,
       telefono
-     // avatar
     };
     await daoTrabajadores.doc(id).set(modelo);
+    await subeStorage(id, avatar);
     muestraTrabajadores();
   } catch (e) {
     muestraError(e);
@@ -89,10 +94,12 @@ async function elimina() {
     if (confirm("Confirmar la " +
       "eliminación")) {
       await daoTrabajadores.doc(id).delete();
+      await eliminaStorage(id);
       muestraTrabajadores();
     }
   } catch (e) {
     muestraError(e);
   }
 }
+
 
