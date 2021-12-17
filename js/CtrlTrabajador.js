@@ -51,7 +51,7 @@ async function busca() {
       forma.telefono.value = data.telefono || "";
       img.src = await urlStorage(data.telefono);
       forma.addEventListener("submit", guarda);
-      forma.eliminar.addEventListener("click", elimina);
+      forma.eliminar.addEventListener("click", elimina(data.telefono));
     } else {
       throw new Error(
         "No se encontró.");
@@ -88,12 +88,10 @@ async function guarda(evt) {
   }
 }
 
-async function elimina() {
+async function elimina(telefono) {
   try {
     if (confirm("Confirmar la eliminación")) {
       await daoTrabajadores.doc(id).delete();
-      const formData = new FormData(forma);
-      const telefono = getString(formData, "telefono").trim();  
       await eliminaStorage(telefono);
       muestraTrabajadores();
     }
