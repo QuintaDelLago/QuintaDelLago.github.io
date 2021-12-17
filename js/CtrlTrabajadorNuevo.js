@@ -12,6 +12,10 @@ import {
 import {
   tieneRol
 } from "./seguridad.js";
+import {
+  guardaTrabajador,
+} from "./trabajadores.js";
+
 
 const daoTrabajadores =
   getFirestore().
@@ -38,15 +42,14 @@ async function guarda(evt) {
     const nombre = getString(formData, "nombredeltrabajador").trim();  
     const puesto = getString(formData, "puesto").trim();
     const telefono = getString(formData, "telefono").trim();
-    const avatar = getString(formData, "avatar").trim();
+    await guardaTrabajador(evt,formData, id);
     /**
      * @type {
         import("./tipos.js").Trabajador} */
     const modelo = {
       nombre, 
       puesto,
-      telefono,
-      avatar
+      telefono
     };
     await daoTrabajadores.
       add(modelo);
