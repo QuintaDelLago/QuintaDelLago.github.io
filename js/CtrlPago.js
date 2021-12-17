@@ -134,7 +134,7 @@ async function faltapagar() {
   }
   
 async function valida(cond, mensaje){
-  if(cond){
+  if(!cond){
     throw new Error(mensaje);
   }
   }
