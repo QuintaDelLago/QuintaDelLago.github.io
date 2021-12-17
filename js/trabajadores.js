@@ -2,11 +2,14 @@ import {
   subeStorage
 } from "../lib/storage.js";
 import {
-  muestraError
+  muestraError,
+  getString
 } from "../lib/util.js";
 import {
   muestraTrabajadores
 } from "./navegacion.js";
+
+
 
 /**
  * @param {Event} evt

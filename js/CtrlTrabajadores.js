@@ -14,11 +14,8 @@ import {
 } from "../lib/storage.js";
 
 /** @type {HTMLUListElement} */
-const lista = document.
-  querySelector("#lista");
-const daoTrabajadores =
-  getFirestore().
-    collection("Trabajadores");
+const lista = document.querySelector("#lista");
+const daoTrabajadores = getFirestore().collection("Trabajadores");
 
 getAuth().
   onAuthStateChanged(
@@ -29,9 +26,7 @@ getAuth().
     usuario */
 async function protege(usuario) {
   if (tieneRol(usuario,
-    ["Administrador"])) {
-    consulta();
-  }
+    ["Administrador"])) {consulta();}
 }
 
 function consulta() {
@@ -52,9 +47,6 @@ function consulta() {
           push(htmlFila(doc)));
         const htmlFilas =
           await Promise.all(trabajadores);
-        /* Junta el todos los
-         * elementos del arreglo en
-         * una cadena. */
         html += htmlFilas.join("");
       } else {
         html += /* html */
