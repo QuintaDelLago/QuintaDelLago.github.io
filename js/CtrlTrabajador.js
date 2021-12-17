@@ -20,7 +20,7 @@ import {
 
 const daoTrabajadores = getFirestore().collection("Trabajadores");
 const params = new URL(location.href).searchParams;
-const id = params.get("id");
+const i = params.get("id");
 /** @type {HTMLFormElement} */
 const forma = document["forma"];
 const img = document.querySelector("img");
@@ -41,7 +41,7 @@ async function protege(usuario) {
  * corresponden al id recibido. */
 async function busca() {
   try {
-    const doc = await daoTrabajadores.doc(id).get();
+    const doc = await daoTrabajadores.doc(i).get();
     if (doc.exists) {
       /**
        * @type {
@@ -82,7 +82,7 @@ async function guarda(evt) {
       puesto,
       telefono
     };
-    await daoTrabajadores.doc(id).set(modelo);
+    await daoTrabajadores.doc(i).set(modelo);
     await subeStorage(id, avatar);
     muestraTrabajadores();
   } catch (e) {
@@ -94,7 +94,7 @@ async function elimina() {
   try {
     if (confirm("Confirmar la " +
       "eliminación")) {
-      await daoTrabajadores.doc(id).delete();
+      await daoTrabajadores.doc(i).delete();
       await eliminaStorage(id);
       muestraTrabajadores();
     }
