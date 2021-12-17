@@ -93,7 +93,9 @@ async function elimina() {
     if (confirm("Confirmar la " +
       "eliminación")) {
       await daoTrabajadores.doc(id).delete();
-      await eliminaStorage(id);
+      const doc = await daoTrabajadores.doc(id).get();
+      const data = doc.data();
+      await eliminaStorage(data.telefono);
       muestraTrabajadores();
     }
   } catch (e) {

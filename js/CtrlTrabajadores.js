@@ -70,7 +70,7 @@ async function htmlFila(doc) {
   const nombre = cod(data.nombre);
   const puesto = cod(data.puesto);
   const telefono = cod(data.telefono);
-  const img = cod(await urlStorage(doc.id));
+  const img = cod(await urlStorage(data.telefono));
   const parámetros =
     new URLSearchParams();
   parámetros.append("id", doc.id);
@@ -85,10 +85,10 @@ async function htmlFila(doc) {
         <span class="texto">
           <strong class="primario">
             ${nombre}
-          <span class="secundario">
+          <a class="secundario">
             ${puesto}<br>
             ${telefono}
-          </span>
+          </a>
         </span>
       </a>
     </li>`);
