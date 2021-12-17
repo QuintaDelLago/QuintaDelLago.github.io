@@ -17,9 +17,7 @@ const daoPagos =
   getFirestore().
     collection("Pagos");
 
-getAuth().
-  onAuthStateChanged(
-    protege, muestraError);
+getAuth().onAuthStateChanged(protege, muestraError);
 
 /** @param {import(
     "../lib/tiposFire.js").User}
@@ -32,10 +30,7 @@ async function protege(usuario) {
 }
 
 function consulta() {
-  daoPagos.
-    orderBy("fecha")
-    .onSnapshot(
-      htmlLista, errConsulta);
+  daoPagos.orderBy("fecha").onSnapshot(htmlLista, errConsulta);
 }
 
 /**
@@ -66,7 +61,7 @@ function htmlFila(doc) {
                   Pago} */
   const data = doc.data();
   const nombre = cod(data.nombre);
-  const faltante = cod(data.falta);
+  const faltante = cod(data.faltante);
   var fsf= cod(data.fecha);
   var fecha = new Date(fsf);
   var dformat = [fecha.getDate()+1, fecha.getMonth()+1, fecha.getFullYear()].join('/');
