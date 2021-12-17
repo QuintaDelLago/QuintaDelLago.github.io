@@ -82,6 +82,7 @@ class MiNav extends HTMLElement {
               <a href="preguntasfrecuentesexternos.html">Preguntas frecuentes</a>
             </li>`;
           } 
+          this.ul.innerHTML += html;
        }         
      }
     }
