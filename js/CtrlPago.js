@@ -43,7 +43,7 @@ async function busca() {
       forma.correo.value = data.correo  || "";
       forma.tipodeevento.value = data.tipo  || "";
       forma.numerodeinvitados.value = data.invitados  || "";
-      forma.precioppersona.value = data.precioppersona   || "";
+      forma.precioppersona.value = data.precioppersona  || "";
       forma.mapagar.value = data.mapagar  || "";
       forma.mpagado.value = data.mpagado  || "";
       forma.faltante.value = data.faltante  || "";
@@ -78,8 +78,7 @@ async function guarda(evt) {
     const fecha = getString(formData, "fecha").trim();
     /**
      * @type {
-        import("./tipos.js").
-                Pago} */
+        import("./tipos.js").Pago} */
     const modelo = {
       nombre,
       correo,
@@ -112,8 +111,8 @@ async function elimina() {
 
 async function pago() {
   try {
-    valida(isNaN(forma.numerodeinvitados.valueAsNumber) || forma.numerodeinvitados.valueAsNumber<=0,"Ingrese el número de invitados");
-    var pago = forma.precioppersona.value * forma.numerodeinvitados.value;
+    valida(isNaN(forma.numerodeinvitados.value) || forma.numerodeinvitados.value<=0,"Ingrese el número de invitados");
+    var pago = forma.precioppersona.value * forma.numerodeinvitados.valueAsNumber;
     forma.mapagar.value = pago;
   } catch (error) {
     alert(error.message)  
