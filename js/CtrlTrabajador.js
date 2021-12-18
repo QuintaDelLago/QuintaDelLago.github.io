@@ -81,7 +81,7 @@ async function guarda(evt) {
       telefono
     };
     await daoTrabajadores.doc(id).set(modelo);
-    await subeStorage(id, avatar);
+    await subeStorage(telefono, avatar);
     muestraTrabajadores();
   } catch (e) {
     muestraError(e);
@@ -91,7 +91,10 @@ async function guarda(evt) {
 async function elimina() {
   try {
     if (confirm("Confirmar la eliminación")) {
+      const doc = await daoTrabajadores.doc(id).get();
+      const imagen = doc.data();
       await daoTrabajadores.doc(id).delete();
+      await eliminaStorage(imagen.telefono);
       await eliminaStorage(id);
       muestraTrabajadores();
     }
